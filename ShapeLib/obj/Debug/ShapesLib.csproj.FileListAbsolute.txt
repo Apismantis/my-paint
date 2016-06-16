@@ -1,0 +1,15 @@
+E:\STUDY\KỲ 5\LẬP TRÌNH WINDOWS\ĐỒ ÁN\1312666\ShapeLib\bin\Debug\ShapeLib.dll
+E:\STUDY\KỲ 5\LẬP TRÌNH WINDOWS\ĐỒ ÁN\1312666\ShapeLib\bin\Debug\ShapeLib.pdb
+E:\STUDY\KỲ 5\LẬP TRÌNH WINDOWS\ĐỒ ÁN\1312666\ShapeLib\obj\Debug\ShapesLib.csprojResolveAssemblyReference.cache
+E:\STUDY\KỲ 5\LẬP TRÌNH WINDOWS\ĐỒ ÁN\1312666\ShapeLib\obj\Debug\ShapeLib.dll
+E:\STUDY\KỲ 5\LẬP TRÌNH WINDOWS\ĐỒ ÁN\1312666\ShapeLib\obj\Debug\ShapeLib.pdb
+E:\Dropbox\STUDY\KỲ 5\LẬP TRÌNH WINDOWS\ĐỒ ÁN\My Paint\1312666\ShapeLib\bin\Debug\ShapeLib.dll
+E:\Dropbox\STUDY\KỲ 5\LẬP TRÌNH WINDOWS\ĐỒ ÁN\My Paint\1312666\ShapeLib\bin\Debug\ShapeLib.pdb
+E:\Dropbox\STUDY\KỲ 5\LẬP TRÌNH WINDOWS\ĐỒ ÁN\My Paint\1312666\ShapeLib\obj\Debug\ShapesLib.csprojResolveAssemblyReference.cache
+E:\Dropbox\STUDY\KỲ 5\LẬP TRÌNH WINDOWS\ĐỒ ÁN\My Paint\1312666\ShapeLib\obj\Debug\ShapeLib.dll
+E:\Dropbox\STUDY\KỲ 5\LẬP TRÌNH WINDOWS\ĐỒ ÁN\My Paint\1312666\ShapeLib\obj\Debug\ShapeLib.pdb
+E:\Dropbox\STUDY\KY 6\KTPM\Final Project\Paint\1312666\ShapeLib\bin\Debug\ShapeLib.dll
+E:\Dropbox\STUDY\KY 6\KTPM\Final Project\Paint\1312666\ShapeLib\bin\Debug\ShapeLib.pdb
+E:\Dropbox\STUDY\KY 6\KTPM\Final Project\Paint\1312666\ShapeLib\obj\Debug\ShapesLib.csprojResolveAssemblyReference.cache
+E:\Dropbox\STUDY\KY 6\KTPM\Final Project\Paint\1312666\ShapeLib\obj\Debug\ShapeLib.dll
+E:\Dropbox\STUDY\KY 6\KTPM\Final Project\Paint\1312666\ShapeLib\obj\Debug\ShapeLib.pdb

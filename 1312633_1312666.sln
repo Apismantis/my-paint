@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.21005.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyPaint", "MyPaint\MyPaint.csproj", "{395F14A1-CC48-4F9B-BF32-ECCAF010DB1F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShapesLib", "ShapeLib\ShapesLib.csproj", "{47B1D57F-1353-416A-94C3-251219BDB036}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TStar", "TStar\TStar.csproj", "{02C23554-8638-40A8-A0D0-B6401E4ADDDF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{395F14A1-CC48-4F9B-BF32-ECCAF010DB1F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{395F14A1-CC48-4F9B-BF32-ECCAF010DB1F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{395F14A1-CC48-4F9B-BF32-ECCAF010DB1F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{395F14A1-CC48-4F9B-BF32-ECCAF010DB1F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{47B1D57F-1353-416A-94C3-251219BDB036}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{47B1D57F-1353-416A-94C3-251219BDB036}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{47B1D57F-1353-416A-94C3-251219BDB036}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{47B1D57F-1353-416A-94C3-251219BDB036}.Release|Any CPU.Build.0 = Release|Any CPU
+		{02C23554-8638-40A8-A0D0-B6401E4ADDDF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{02C23554-8638-40A8-A0D0-B6401E4ADDDF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{02C23554-8638-40A8-A0D0-B6401E4ADDDF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{02C23554-8638-40A8-A0D0-B6401E4ADDDF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

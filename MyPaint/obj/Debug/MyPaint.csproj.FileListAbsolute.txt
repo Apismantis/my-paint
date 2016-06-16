@@ -1,0 +1,61 @@
+E:\STUDY\KỲ 5\LẬP TRÌNH WINDOWS\ĐỒ ÁN\1312666\MyPaint\bin\Debug\MyPaint.exe.config
+E:\STUDY\KỲ 5\LẬP TRÌNH WINDOWS\ĐỒ ÁN\1312666\MyPaint\obj\Debug\MyPaint.csprojResolveAssemblyReference.cache
+E:\STUDY\KỲ 5\LẬP TRÌNH WINDOWS\ĐỒ ÁN\1312666\MyPaint\obj\Debug\MainWindow.baml
+E:\STUDY\KỲ 5\LẬP TRÌNH WINDOWS\ĐỒ ÁN\1312666\MyPaint\obj\Debug\MainWindow.g.cs
+E:\STUDY\KỲ 5\LẬP TRÌNH WINDOWS\ĐỒ ÁN\1312666\MyPaint\obj\Debug\App.g.cs
+E:\STUDY\KỲ 5\LẬP TRÌNH WINDOWS\ĐỒ ÁN\1312666\MyPaint\obj\Debug\GeneratedInternalTypeHelper.g.cs
+E:\STUDY\KỲ 5\LẬP TRÌNH WINDOWS\ĐỒ ÁN\1312666\MyPaint\obj\Debug\MyPaint_MarkupCompile.cache
+E:\STUDY\KỲ 5\LẬP TRÌNH WINDOWS\ĐỒ ÁN\1312666\MyPaint\obj\Debug\MyPaint_MarkupCompile.lref
+E:\STUDY\KỲ 5\LẬP TRÌNH WINDOWS\ĐỒ ÁN\1312666\MyPaint\bin\Debug\MyPaint.exe
+E:\STUDY\KỲ 5\LẬP TRÌNH WINDOWS\ĐỒ ÁN\1312666\MyPaint\bin\Debug\MyPaint.pdb
+E:\STUDY\KỲ 5\LẬP TRÌNH WINDOWS\ĐỒ ÁN\1312666\MyPaint\bin\Debug\ShapeLib.dll
+E:\STUDY\KỲ 5\LẬP TRÌNH WINDOWS\ĐỒ ÁN\1312666\MyPaint\bin\Debug\Xceed.Wpf.Toolkit.dll
+E:\STUDY\KỲ 5\LẬP TRÌNH WINDOWS\ĐỒ ÁN\1312666\MyPaint\bin\Debug\ShapeLib.pdb
+E:\STUDY\KỲ 5\LẬP TRÌNH WINDOWS\ĐỒ ÁN\1312666\MyPaint\obj\Debug\Resources\DesignerItem.baml
+E:\STUDY\KỲ 5\LẬP TRÌNH WINDOWS\ĐỒ ÁN\1312666\MyPaint\obj\Debug\Resources\ResizeRotateChrome.baml
+E:\STUDY\KỲ 5\LẬP TRÌNH WINDOWS\ĐỒ ÁN\1312666\MyPaint\obj\Debug\Resources\SizeChrome.baml
+E:\STUDY\KỲ 5\LẬP TRÌNH WINDOWS\ĐỒ ÁN\1312666\MyPaint\obj\Debug\MyPaint.g.resources
+E:\STUDY\KỲ 5\LẬP TRÌNH WINDOWS\ĐỒ ÁN\1312666\MyPaint\obj\Debug\MyPaint.Properties.Resources.resources
+E:\STUDY\KỲ 5\LẬP TRÌNH WINDOWS\ĐỒ ÁN\1312666\MyPaint\obj\Debug\MyPaint.csproj.GenerateResource.Cache
+E:\STUDY\KỲ 5\LẬP TRÌNH WINDOWS\ĐỒ ÁN\1312666\MyPaint\obj\Debug\MyPaint.exe
+E:\STUDY\KỲ 5\LẬP TRÌNH WINDOWS\ĐỒ ÁN\1312666\MyPaint\obj\Debug\MyPaint.pdb
+E:\Dropbox\STUDY\KỲ 5\LẬP TRÌNH WINDOWS\ĐỒ ÁN\My Paint\1312666\MyPaint\bin\Debug\MyPaint.exe.config
+E:\Dropbox\STUDY\KỲ 5\LẬP TRÌNH WINDOWS\ĐỒ ÁN\My Paint\1312666\MyPaint\obj\Debug\MyPaint.exe
+E:\Dropbox\STUDY\KỲ 5\LẬP TRÌNH WINDOWS\ĐỒ ÁN\My Paint\1312666\MyPaint\obj\Debug\MyPaint.pdb
+E:\Dropbox\STUDY\KỲ 5\LẬP TRÌNH WINDOWS\ĐỒ ÁN\My Paint\1312666\MyPaint\bin\Debug\MyPaint.exe
+E:\Dropbox\STUDY\KỲ 5\LẬP TRÌNH WINDOWS\ĐỒ ÁN\My Paint\1312666\MyPaint\bin\Debug\MyPaint.pdb
+E:\Dropbox\STUDY\KỲ 5\LẬP TRÌNH WINDOWS\ĐỒ ÁN\My Paint\1312666\MyPaint\bin\Debug\ShapeLib.dll
+E:\Dropbox\STUDY\KỲ 5\LẬP TRÌNH WINDOWS\ĐỒ ÁN\My Paint\1312666\MyPaint\bin\Debug\ShapeLib.pdb
+E:\Dropbox\STUDY\KỲ 5\LẬP TRÌNH WINDOWS\ĐỒ ÁN\My Paint\1312666\MyPaint\obj\Debug\MyPaint.csprojResolveAssemblyReference.cache
+E:\Dropbox\STUDY\KỲ 5\LẬP TRÌNH WINDOWS\ĐỒ ÁN\My Paint\1312666\MyPaint\obj\Debug\MainWindow.baml
+E:\Dropbox\STUDY\KỲ 5\LẬP TRÌNH WINDOWS\ĐỒ ÁN\My Paint\1312666\MyPaint\obj\Debug\MainWindow.g.cs
+E:\Dropbox\STUDY\KỲ 5\LẬP TRÌNH WINDOWS\ĐỒ ÁN\My Paint\1312666\MyPaint\obj\Debug\App.g.cs
+E:\Dropbox\STUDY\KỲ 5\LẬP TRÌNH WINDOWS\ĐỒ ÁN\My Paint\1312666\MyPaint\obj\Debug\GeneratedInternalTypeHelper.g.cs
+E:\Dropbox\STUDY\KỲ 5\LẬP TRÌNH WINDOWS\ĐỒ ÁN\My Paint\1312666\MyPaint\obj\Debug\MyPaint_MarkupCompile.cache
+E:\Dropbox\STUDY\KỲ 5\LẬP TRÌNH WINDOWS\ĐỒ ÁN\My Paint\1312666\MyPaint\obj\Debug\MyPaint_MarkupCompile.lref
+E:\Dropbox\STUDY\KỲ 5\LẬP TRÌNH WINDOWS\ĐỒ ÁN\My Paint\1312666\MyPaint\obj\Debug\Resources\DesignerItem.baml
+E:\Dropbox\STUDY\KỲ 5\LẬP TRÌNH WINDOWS\ĐỒ ÁN\My Paint\1312666\MyPaint\obj\Debug\Resources\ResizeRotateChrome.baml
+E:\Dropbox\STUDY\KỲ 5\LẬP TRÌNH WINDOWS\ĐỒ ÁN\My Paint\1312666\MyPaint\obj\Debug\Resources\SizeChrome.baml
+E:\Dropbox\STUDY\KỲ 5\LẬP TRÌNH WINDOWS\ĐỒ ÁN\My Paint\1312666\MyPaint\obj\Debug\MyPaint.g.resources
+E:\Dropbox\STUDY\KỲ 5\LẬP TRÌNH WINDOWS\ĐỒ ÁN\My Paint\1312666\MyPaint\obj\Debug\MyPaint.Properties.Resources.resources
+E:\Dropbox\STUDY\KỲ 5\LẬP TRÌNH WINDOWS\ĐỒ ÁN\My Paint\1312666\MyPaint\obj\Debug\MyPaint.csproj.GenerateResource.Cache
+E:\Dropbox\STUDY\KY 6\KTPM\Final Project\Paint\1312666\MyPaint\bin\Debug\MyPaint.exe.config
+E:\Dropbox\STUDY\KY 6\KTPM\Final Project\Paint\1312666\MyPaint\obj\Debug\MyPaint.exe
+E:\Dropbox\STUDY\KY 6\KTPM\Final Project\Paint\1312666\MyPaint\obj\Debug\MyPaint.pdb
+E:\Dropbox\STUDY\KY 6\KTPM\Final Project\Paint\1312666\MyPaint\obj\Debug\MyPaint.csprojResolveAssemblyReference.cache
+E:\Dropbox\STUDY\KY 6\KTPM\Final Project\Paint\1312666\MyPaint\obj\Debug\MainWindow.baml
+E:\Dropbox\STUDY\KY 6\KTPM\Final Project\Paint\1312666\MyPaint\obj\Debug\MainWindow.g.cs
+E:\Dropbox\STUDY\KY 6\KTPM\Final Project\Paint\1312666\MyPaint\obj\Debug\App.g.cs
+E:\Dropbox\STUDY\KY 6\KTPM\Final Project\Paint\1312666\MyPaint\obj\Debug\GeneratedInternalTypeHelper.g.cs
+E:\Dropbox\STUDY\KY 6\KTPM\Final Project\Paint\1312666\MyPaint\obj\Debug\MyPaint_MarkupCompile.cache
+E:\Dropbox\STUDY\KY 6\KTPM\Final Project\Paint\1312666\MyPaint\obj\Debug\MyPaint_MarkupCompile.lref
+E:\Dropbox\STUDY\KY 6\KTPM\Final Project\Paint\1312666\MyPaint\obj\Debug\Resources\DesignerItem.baml
+E:\Dropbox\STUDY\KY 6\KTPM\Final Project\Paint\1312666\MyPaint\obj\Debug\Resources\ResizeRotateChrome.baml
+E:\Dropbox\STUDY\KY 6\KTPM\Final Project\Paint\1312666\MyPaint\obj\Debug\Resources\SizeChrome.baml
+E:\Dropbox\STUDY\KY 6\KTPM\Final Project\Paint\1312666\MyPaint\obj\Debug\MyPaint.g.resources
+E:\Dropbox\STUDY\KY 6\KTPM\Final Project\Paint\1312666\MyPaint\obj\Debug\MyPaint.Properties.Resources.resources
+E:\Dropbox\STUDY\KY 6\KTPM\Final Project\Paint\1312666\MyPaint\obj\Debug\MyPaint.csproj.GenerateResource.Cache
+E:\Dropbox\STUDY\KY 6\KTPM\Final Project\Paint\1312666\MyPaint\bin\Debug\MyPaint.exe
+E:\Dropbox\STUDY\KY 6\KTPM\Final Project\Paint\1312666\MyPaint\bin\Debug\MyPaint.pdb
+E:\Dropbox\STUDY\KY 6\KTPM\Final Project\Paint\1312666\MyPaint\bin\Debug\ShapeLib.dll
+E:\Dropbox\STUDY\KY 6\KTPM\Final Project\Paint\1312666\MyPaint\bin\Debug\ShapeLib.pdb
