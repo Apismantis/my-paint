@@ -27,5 +27,15 @@ namespace ShapeLib
             Ellipse ellipse = (Ellipse)cc.Content;
             updateStyle(ellipse);
         }
+
+        public override TShape clone()
+        {
+            return new TEllipse();
+        }
+
+        public override string getShapeName()
+        {
+            return "TEllipse";
+        }
     }
 }

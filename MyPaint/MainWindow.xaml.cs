@@ -25,6 +25,7 @@ namespace MyPaint
         TShape shape;
         Point StartPoint;
         Point EndPoint;
+        TShapeCreator shapeCreator = new TShapeCreator();
         int drawElementType = 0;
 
         bool isMouseDown = false;
@@ -164,11 +165,11 @@ namespace MyPaint
 
             if (shape != null && drawElementType != (int)DrawElementType.Text && drawElementType != (int)DrawElementType.Fill)
             {
-                shape.StrokeBrush = strokeBrush;
+                shape.StrokeColorBrush = strokeBrush;
                 shape.StrokeThickness = strokeThicknessSize;
-                shape.FillBrush = fillBrush;
+                shape.FillColorBrush = fillBrush;
                 shape.StartPoint = e.GetPosition(PaintCanvas);
-                shape.StrokeDashArray = new DoubleCollection(dashes);
+                shape.StrokeType = new DoubleCollection(dashes);
                 Style controlStyle = (Style)FindResource("DesignerItemStyle");
 
                 // Selection tool
@@ -177,10 +178,10 @@ namespace MyPaint
                     DoubleCollection dashesTemp = new DoubleCollection();
                     dashesTemp.Add(0.5);
 
-                    shape.StrokeBrush = System.Windows.Media.Brushes.Blue;
+                    shape.StrokeColorBrush = System.Windows.Media.Brushes.Blue;
                     shape.StrokeThickness = 1;
-                    shape.FillBrush = System.Windows.Media.Brushes.Transparent;
-                    shape.StrokeDashArray = new DoubleCollection(dashesTemp);
+                    shape.FillColorBrush = System.Windows.Media.Brushes.Transparent;
+                    shape.StrokeType = new DoubleCollection(dashesTemp);
                 }
 
                 if (controlStyle != null)
@@ -282,7 +283,8 @@ namespace MyPaint
         // Line tool
         private void btnLineTool_Click(object sender, RoutedEventArgs e)
         {
-            shape = new TLine();
+            //shape = new TLine();
+            shape = shapeCreator.createNewShape("TLine");
             drawElementType = (int)DrawElementType.Line;
 
             setButtonBorderAndThickness(btnLineTool, (SolidColorBrush)(new BrushConverter().ConvertFrom("#CFD8DC")), 1);
@@ -294,7 +296,7 @@ namespace MyPaint
         // Rectangle tool
         private void btnRectangleTool_Click(object sender, RoutedEventArgs e)
         {
-            shape = new TRectangle();
+            //shape = new TRectangle();
             drawElementType = (int)DrawElementType.Rectangle;
 
             setButtonBorderAndThickness(btnRectangleTool, (SolidColorBrush)(new BrushConverter().ConvertFrom("#CFD8DC")), 1);
@@ -369,7 +371,7 @@ namespace MyPaint
                 // Cập nhật màu nếu đang chọn shape
                 if (isSelectShape)
                 {
-                    shape.StrokeBrush = strokeBrush;
+                    shape.StrokeColorBrush = strokeBrush;
                     shape.updateShapeStyle(PaintCanvas.Children);
                 }
             }
@@ -386,7 +388,7 @@ namespace MyPaint
                 // Cập nhật màu nếu đang chọn shape
                 if (isSelectShape)
                 {
-                    shape.FillBrush = fillBrush;
+                    shape.FillColorBrush = fillBrush;
                     shape.updateShapeStyle(PaintCanvas.Children);
                 }
             }
@@ -405,7 +407,7 @@ namespace MyPaint
                 // Cập nhật màu nếu đang chọn shape
                 if (isSelectShape)
                 {
-                    shape.StrokeBrush = strokeBrush;
+                    shape.StrokeColorBrush = strokeBrush;
                     shape.updateShapeStyle(PaintCanvas.Children);
                 }
             }
@@ -417,7 +419,7 @@ namespace MyPaint
                 // Cập nhật màu nếu đang chọn shape
                 if (isSelectShape)
                 {
-                    shape.FillBrush = fillBrush;
+                    shape.FillColorBrush = fillBrush;
                     shape.updateShapeStyle(PaintCanvas.Children);
                 }
             }
@@ -561,7 +563,7 @@ namespace MyPaint
             // Cập nhật brush nếu đang chọn shape
             if (isSelectShape)
             {
-                shape.StrokeDashArray = new DoubleCollection(dashes);
+                shape.StrokeType = new DoubleCollection(dashes);
                 shape.updateShapeStyle(PaintCanvas.Children);
             }
         }
@@ -647,7 +649,7 @@ namespace MyPaint
                 // Cập nhật shape nếu đang chọn shape
                 if (isSelectShape)
                 {
-                    shape.FillBrush = fillBrush;
+                    shape.FillColorBrush = fillBrush;
                     shape.updateShapeStyle(PaintCanvas.Children);
                 }
             }

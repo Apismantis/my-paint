@@ -81,5 +81,15 @@ namespace MyPaint
 
             return pointCollection;
         }
+
+        public override TShape clone()
+        {
+            return new TArrow();
+        }
+
+        public override string getShapeName()
+        {
+            return "TArrow";
+        }
     }
 }

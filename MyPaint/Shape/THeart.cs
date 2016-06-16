@@ -32,5 +32,15 @@ namespace MyPaint
             Path heart = (Path)cc.Content;
             updateStyle(heart);
         }
+
+        public override TShape clone()
+        {
+            return new TArrow();
+        }
+
+        public override string getShapeName()
+        {
+            return "THeart";
+        }
     }
 }

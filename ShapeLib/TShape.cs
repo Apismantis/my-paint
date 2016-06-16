@@ -7,24 +7,25 @@ using System.Windows;
 using System.Windows.Media;
 using System.Windows.Controls;
 using System.Windows.Shapes;
+using TColorLib;
 
 namespace ShapeLib
 {
     public abstract class TShape
     {
-        public SolidColorBrush StrokeBrush { get; set; }
-
-        public Brush FillBrush { get; set; }
-
-        public double StrokeThickness { get; set; }
-
         public Point StartPoint { get; set; }
 
         public Point EndPoint { get; set; }
 
-        public UIElement DrawElement { get; set; }
+        public SolidColorBrush StrokeColorBrush { get; set; }
 
-        public DoubleCollection StrokeDashArray { get; set; }
+        public Brush FillColorBrush { get; set; }
+
+        public double StrokeThickness { get; set; }
+
+        public DoubleCollection StrokeType { get; set; }
+
+        public UIElement DrawElement { get; set; }
 
         public Style controlStyle { get; set; }
 
@@ -32,19 +33,43 @@ namespace ShapeLib
 
         public ContentControl lastCC { get; set; }
 
+        public TShape()
+        {
+            StartPoint = new Point(0, 0);
+            EndPoint = new Point(0, 0);
+            StrokeColorBrush = MyColorConverter.convertToSolidColor("#FF22B14C");
+            FillColorBrush = System.Windows.Media.Brushes.Transparent;
+            StrokeThickness = 1;
+        }
+
+        public TShape(Point startPoint, Point endPoint, SolidColorBrush strokeColorBrush,
+            SolidColorBrush fillColorBrush, DoubleCollection strokeType, double strokeThickness)
+        {
+            this.StartPoint = startPoint;
+            this.EndPoint = endPoint;
+            this.StrokeColorBrush = strokeColorBrush;
+            this.FillColorBrush = fillColorBrush;
+            this.StrokeType = strokeType;
+            this.StrokeThickness = strokeThickness;
+        }
+
         public abstract void draw(bool isShiftKeyPress, UIElementCollection collection);
 
         public abstract void drawInMouseMove(bool isShiftKeyPress, UIElementCollection collection);
 
         public abstract void updateShapeStyle(UIElementCollection collection);
 
+        public abstract TShape clone();
+
+        public abstract string getShapeName();
+
         // Ve hinh moi
         public virtual void drawNewShape(bool isShiftKeyPress, Shape shape, UIElementCollection collection)
         {
-            shape.Stroke = StrokeBrush;
-            shape.Fill = FillBrush;
+            shape.Stroke = StrokeColorBrush;
+            shape.Fill = FillColorBrush;
             shape.StrokeThickness = StrokeThickness;
-            shape.StrokeDashArray = StrokeDashArray;
+            shape.StrokeDashArray = StrokeType;
 
             double width = Math.Abs(StartPoint.X - EndPoint.X);
             double height = Math.Abs(StartPoint.Y - EndPoint.Y);
@@ -84,10 +109,10 @@ namespace ShapeLib
                 addSape = true;
             }
 
-            shape.Stroke = StrokeBrush;
-            shape.Fill = FillBrush;
+            shape.Stroke = StrokeColorBrush;
+            shape.Fill = FillColorBrush;
             shape.StrokeThickness = StrokeThickness;
-            shape.StrokeDashArray = StrokeDashArray;
+            shape.StrokeDashArray = StrokeType;
 
             double width = Math.Abs(StartPoint.X - EndPoint.X);
             double height = Math.Abs(StartPoint.Y - EndPoint.Y);
@@ -111,24 +136,21 @@ namespace ShapeLib
             if (addSape)
                 collection.Add(lastCC);
         }
-        
+
         // Cap nhat style cua hinh
         public virtual void updateStyle(Shape shape)
         {
-            shape.Stroke = StrokeBrush;
+            shape.Stroke = StrokeColorBrush;
             shape.StrokeThickness = StrokeThickness;
-            shape.StrokeDashArray = StrokeDashArray;
-            shape.Fill = FillBrush;
-
-            cc.Content = shape;
-            DrawElement = cc;
+            shape.StrokeDashArray = StrokeType;
+            shape.Fill = FillColorBrush;
         }
 
         // Xoa hinh
         public void removeShape(UIElementCollection collection)
         {
             if (lastCC != null)
-            {                
+            {
                 collection.Remove((Shape)lastCC.Content);
                 collection.Remove(lastCC);
                 lastCC = null;

@@ -72,5 +72,15 @@ namespace MyPaint
 
             return pointCollection;
         }
+
+        public override TShape clone()
+        {
+            return new TStar();
+        }
+
+        public override string getShapeName()
+        {
+            return "TStar";
+        }
     }
 }

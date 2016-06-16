@@ -64,14 +64,22 @@
     <Compile Include="Adorners\ResizingAdorner.cs" />
     <Compile Include="Adorners\SizeAdorner.cs" />
     <Compile Include="Adorners\SizeChrome.cs" />
+    <Compile Include="BitmapHelper.cs" />
+    <Compile Include="FillShapeHelper\CaroFillHelper.cs" />
     <Compile Include="DesignerItemDecorator.cs" />
+    <Compile Include="FillShapeHelper\FillShapeHelper.cs" />
+    <Compile Include="FillShapeHelper\ImageFillHelper.cs" />
+    <Compile Include="FillShapeHelper\LinearGradientHelper.cs" />
     <Compile Include="PaintCanvasManager.cs" />
+    <Compile Include="FillShapeHelper\RadialGradientHelper.cs" />
     <Compile Include="ResizeThumb.cs" />
     <Compile Include="RotateThumb.cs" />
     <Compile Include="Shape\TArrow.cs" />
     <Compile Include="Shape\THeart.cs" />
     <Compile Include="Shape\TLine.cs" />
     <Compile Include="Shape\TOvalCallOut.cs" />
+    <Compile Include="FillShapeHelper\SolidFillHelper.cs" />
+    <Compile Include="TShapeCreator.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -117,6 +125,7 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <None Include="ClassDiagram1.cd" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -139,6 +148,10 @@
     <ProjectReference Include="..\ShapeLib\ShapesLib.csproj">
       <Project>{47b1d57f-1353-416a-94c3-251219bdb036}</Project>
       <Name>ShapesLib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TColorLib\TColorLib.csproj">
+      <Project>{dcec0bf5-ca56-4aad-8a82-cf1e04090fc2}</Project>
+      <Name>TColorLib</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

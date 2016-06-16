@@ -38,5 +38,15 @@ namespace ShapeLib
             Line line = (Line)cc.Content;
             updateStyle(line);
         }
+
+        public override TShape clone()
+        {
+            return new TLine();
+        }
+
+        public override string getShapeName()
+        {
+            return "TLine";
+        }
     }
 }

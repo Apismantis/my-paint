@@ -10,6 +10,7 @@ namespace ShapeLib
 {
     public class TRectangle : TShape
     {
+
         public override void draw(bool isShiftKeyPress, UIElementCollection collection)
         {
             Rectangle rect = new Rectangle();
@@ -26,6 +27,16 @@ namespace ShapeLib
         {
             Rectangle rect = (Rectangle) cc.Content;
             updateStyle(rect);
+        }
+
+        public override TShape clone()
+        {
+            return new TRectangle();
+        }
+
+        public override string getShapeName()
+        {
+            return "TRectangle";
         }
     }
 }

@@ -61,5 +61,15 @@ namespace MyPaint
             pathGeometry.Figures.Add(pathFigure);
             return pathGeometry;
         }
+
+        public override TShape clone()
+        {
+            return new TOvalCallout();
+        }
+
+        public override string getShapeName()
+        {
+            return "TOvalCallOut";
+        }
     }
 }

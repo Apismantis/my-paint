@@ -50,6 +50,12 @@
     <Compile Include="TShape.cs" />
     <Compile Include="TTriangle.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TColorLib\TColorLib.csproj">
+      <Project>{dcec0bf5-ca56-4aad-8a82-cf1e04090fc2}</Project>
+      <Name>TColorLib</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

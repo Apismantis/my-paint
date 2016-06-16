@@ -57,5 +57,15 @@ namespace ShapeLib
 
             return pointCollection;
         }
+
+        public override TShape clone()
+        {
+            return new TTriangle();
+        }
+
+        public override string getShapeName()
+        {
+            return "TTriangle";
+        }
     }
 }
