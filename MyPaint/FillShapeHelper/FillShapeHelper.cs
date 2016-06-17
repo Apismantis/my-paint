@@ -8,6 +8,6 @@ namespace MyPaint
 {
     public abstract class FillShapeHelper
     {
-        public abstract Brush GetBrush(SolidColorBrush color);
+        public abstract Brush GetBrush(Brush color);
     }
 }

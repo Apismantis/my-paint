@@ -82,24 +82,24 @@
                 <!--Shape Group-->
                 <RibbonGroup Header="Shape" Height="89" Margin="0" VerticalAlignment="Top" Width="186">
                     <!--Line tool-->
-                    <RibbonButton x:Name="btnLineTool" Content="" HorizontalAlignment="Left" Margin="5,11,-11.8,-8.8" VerticalAlignment="Top" Width="26" Click="btnLineTool_Click" BorderBrush="{x:Null}" Height="29">
+                    <RibbonButton x:Name="btnLineTool" Content="" HorizontalAlignment="Left" Margin="5,11,-11.8,-8.8" VerticalAlignment="Top" Width="26" BorderBrush="{x:Null}" Height="29">
                         <RibbonButton.Background>
                             <ImageBrush ImageSource="Resources/line_tool.png"/>
                         </RibbonButton.Background>
                     </RibbonButton>
                     <!--Rectangle tool-->
-                    <RibbonButton x:Name="btnRectangleTool" Content="" HorizontalAlignment="Left" Margin="42,-21,-72,-9" Width="30" Click="btnRectangleTool_Click" BorderBrush="{x:Null}" Height="30" VerticalAlignment="Top">
+                    <RibbonButton x:Name="btnRectangleTool" Content="" HorizontalAlignment="Left" Margin="42,-21,-72,-9" Width="30" BorderBrush="{x:Null}" Height="30" VerticalAlignment="Top">
                         <RibbonButton.Background>
                             <ImageBrush ImageSource="Resources/rectangle_tool.png"/>
                         </RibbonButton.Background>
                     </RibbonButton>
                     <!--Ellipse tool-->
-                    <RibbonButton x:Name="btnEllipseTool" Content="" Margin="88,-21,-121,-9" VerticalAlignment="Top" Click="btnEllipseTool_Click" BorderBrush="{x:Null}" Height="30" HorizontalAlignment="Left" Width="33">
+                    <RibbonButton x:Name="btnEllipseTool" Content="" Margin="88,-21,-121,-9" VerticalAlignment="Top"  BorderBrush="{x:Null}" Height="30" HorizontalAlignment="Left" Width="33">
                         <RibbonButton.Background>
                             <ImageBrush ImageSource="Resources/ellipse_tool.png"/>
                         </RibbonButton.Background>
                     </RibbonButton>
-                    <RibbonButton x:Name="btnArrowTool" HorizontalAlignment="Left" Height="26" Margin="136,-18,-155.6,-1.6" VerticalAlignment="Top" Width="26" Click="btnArrowTool_Click">
+                    <RibbonButton x:Name="btnArrowTool" HorizontalAlignment="Left" Height="26" Margin="136,-18,-155.6,-1.6" VerticalAlignment="Top" Width="26">
                         <RibbonButton.Background>
                             <ImageBrush ImageSource="Resources/arrow.png"/>
                         </RibbonButton.Background>
@@ -135,14 +135,14 @@
                     </Label>
 
                     <!--Default Color-->
-                    <RibbonButton x:Name="btnColorNoneColor" Content="None" Margin="62,-18,-82,-0.4" VerticalAlignment="Top" BorderBrush="#FFE5E5E5" Height="20" Click="btnColorNoneColor_Click" FontSize="20" VerticalContentAlignment="Center" HorizontalAlignment="Left" Width="20" Foreground="{DynamicResource {x:Static SystemColors.MenuTextBrushKey}}" Background="#FFF2F6FB" MouseOverBackground="#FFE5E5E5" MouseOverBorderBrush="#FFFAFAFA"/>
-                    <RibbonButton x:Name="btnColorFFED1C24" Content="" Margin="62,-41,-82,0" Background="#FFED1C24" BorderBrush="#FFE5E5E5" Click="btnColorFFED1C24_Click" Height="20" VerticalAlignment="Top" HorizontalAlignment="Left" Width="20" MouseOverBackground="#FFE5E5E5" MouseOverBorderBrush="#FFFAFAFA"/>
-                    <RibbonButton x:Name="btnColorFF00A2E8" Content="" Margin="85,-41,-105,0" Background="#FF00A2E8" BorderBrush="#FFE5E5E5" Click="btnColorFF00A2E8_Click" Height="20" VerticalAlignment="Top" HorizontalAlignment="Left" Width="20" MouseOverBackground="#FFE5E5E5" MouseOverBorderBrush="#FFFAFAFA"/>
-                    <RibbonButton x:Name="btnColorFF3F48CC" Content="" Margin="-23,26,3,16.4" Background="#FF3F48CC" BorderBrush="#FFE5E5E5" Click="btnColorFF3F48CC_Click" Height="20" MouseOverBackground="#FFE5E5E5" MouseOverBorderBrush="#FFFAFAFA"/>
-                    <RibbonButton x:Name="btnColorFFA349A4" Content="" HorizontalAlignment="Left" Margin="0,4,0,0" VerticalAlignment="Top" Width="20" Background="#FFA349A4" BorderBrush="#FFE5E5E5" Height="20" Click="btnColorFFA349A4_Click" MouseOverBackground="#FFE5E5E5" MouseOverBorderBrush="#FFFAFAFA"/>
-                    <RibbonButton x:Name="btnColorFF22B14C" Content="" HorizontalAlignment="Left" Margin="0,2,-0.8,-1.2" VerticalAlignment="Top" Width="20" Background="#FF22B14C" BorderBrush="#FFE5E5E5" Height="20" Click="btnColorFF22B14C_Click" MouseOverBackground="#FFE5E5E5" MouseOverBorderBrush="#FFFAFAFA"/>
-                    <RibbonButton x:Name="btnColorFFFF7F27" Content="" HorizontalAlignment="Left" Margin="3,26,-12.6,2.8" Width="20" Background="#FFFF7F27" BorderBrush="#FFE5E5E5" Click="btnColorFFFF7F27_Click" Height="20" MouseOverBackground="#FFE5E5E5" MouseOverBorderBrush="#FFFAFAFA"/>
-                    <RibbonButton x:Name="btnColorFFFFC90E" Content="" HorizontalAlignment="Left" Margin="3,-45,-23,0" VerticalAlignment="Top" Width="20" Background="#FFFFC90E" BorderBrush="#FFE5E5E5" Height="20" Click="btnColorFFFFC90E_Click" MouseOverBackground="#FFE5E5E5" MouseOverBorderBrush="#FFFAFAFA"/>
+                    <RibbonButton x:Name="btnColorNoneColor" Content="None" Margin="62,-18,-82,-0.4" VerticalAlignment="Top" BorderBrush="#FFE5E5E5" Height="20" FontSize="20" VerticalContentAlignment="Center" HorizontalAlignment="Left" Width="20" Foreground="{DynamicResource {x:Static SystemColors.MenuTextBrushKey}}" Background="#FFF2F6FB" MouseOverBackground="#FFE5E5E5" MouseOverBorderBrush="#FFFAFAFA"/>
+                    <RibbonButton x:Name="btnColorFFED1C24" Content="" Margin="62,-41,-82,0" Background="#FFED1C24" BorderBrush="#FFE5E5E5" Height="20" VerticalAlignment="Top" HorizontalAlignment="Left" Width="20" MouseOverBackground="#FFE5E5E5" MouseOverBorderBrush="#FFFAFAFA"/>
+                    <RibbonButton x:Name="btnColorFF00A2E8" Content="" Margin="85,-41,-105,0" Background="#FF00A2E8" BorderBrush="#FFE5E5E5" Height="20" VerticalAlignment="Top" HorizontalAlignment="Left" Width="20" MouseOverBackground="#FFE5E5E5" MouseOverBorderBrush="#FFFAFAFA"/>
+                    <RibbonButton x:Name="btnColorFF3F48CC" Content="" Margin="-23,26,3,16.4" Background="#FF3F48CC" BorderBrush="#FFE5E5E5" Height="20" MouseOverBackground="#FFE5E5E5" MouseOverBorderBrush="#FFFAFAFA"/>
+                    <RibbonButton x:Name="btnColorFFA349A4" Content="" HorizontalAlignment="Left" Margin="0,4,0,0" VerticalAlignment="Top" Width="20" Background="#FFA349A4" BorderBrush="#FFE5E5E5" Height="20" MouseOverBackground="#FFE5E5E5" MouseOverBorderBrush="#FFFAFAFA"/>
+                    <RibbonButton x:Name="btnColorFF22B14C" Content="" HorizontalAlignment="Left" Margin="0,2,-0.8,-1.2" VerticalAlignment="Top" Width="20" Background="#FF22B14C" BorderBrush="#FFE5E5E5" Height="20" MouseOverBackground="#FFE5E5E5" MouseOverBorderBrush="#FFFAFAFA"/>
+                    <RibbonButton x:Name="btnColorFFFF7F27" Content="" HorizontalAlignment="Left" Margin="3,26,-12.6,2.8" Width="20" Background="#FFFF7F27" BorderBrush="#FFE5E5E5" Height="20" MouseOverBorderBrush="#FFFAFAFA"/>
+                    <RibbonButton x:Name="btnColorFFFFC90E" Content="" HorizontalAlignment="Left" Margin="3,-45,-23,0" VerticalAlignment="Top" Width="20" Background="#FFFFC90E" BorderBrush="#FFE5E5E5" Height="20" MouseOverBackground="#FFE5E5E5" MouseOverBorderBrush="#FFFAFAFA"/>
                     <Label Content="More Color" Margin="27,0,-26.4,-13" FontSize="8" HorizontalContentAlignment="Center" Padding="1" VerticalContentAlignment="Center" Height="13" VerticalAlignment="Top">
                         <Label.Foreground>
                             <SolidColorBrush Color="Black" Opacity="0.515"/>

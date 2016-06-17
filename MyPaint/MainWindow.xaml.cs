@@ -11,7 +11,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Diagnostics;
-
+using TColorLib;
 
 namespace MyPaint
 {
@@ -25,8 +25,8 @@ namespace MyPaint
         TShape shape;
         Point StartPoint;
         Point EndPoint;
-        TShapeCreator shapeCreator = new TShapeCreator();
-        int drawElementType = 0;
+        TShapeCreator ShapeCreator = new TShapeCreator();
+        int DrawType = 0;
 
         bool isMouseDown = false;
         bool isShiftKeyDown = false;
@@ -35,17 +35,19 @@ namespace MyPaint
         bool isSelectionTool = false;
         bool isSelectShape = false;
 
-        System.Windows.Controls.RichTextBox rtbText;
+        RichTextBox rtbText;
 
-        int strokeThicknessSize = 1;
-        SolidColorBrush strokeBrush = (SolidColorBrush)(new BrushConverter().ConvertFrom("#FF22B14C"));
-        Brush fillBrush = System.Windows.Media.Brushes.Transparent;
-        DoubleCollection dashes = new DoubleCollection();
+        double StrokeThicknessSize;
+        Brush StrokeBrush;
+        Brush FillBrush;
+        DoubleCollection Dashes;
 
         enum DrawElementType : int
         {
-            Rectangle = 1, Line = 2, Ellipse = 3, Star = 4,
-            Heart = 5, Arrow = 6, OvalCallOut = 7, SelectionTool = 20, Text = 21, Fill = 30
+            Shape = 1,
+            SelectionTool = 2,
+            Text = 3,
+            Fill = 4
         }
 
         #endregion
@@ -53,6 +55,10 @@ namespace MyPaint
         public MainWindow()
         {
             InitializeComponent();
+            StrokeThicknessSize = 1;
+            StrokeBrush = MyColorConverter.convertToSolidColor("#FF22B14C");
+            FillBrush = System.Windows.Media.Brushes.Transparent;
+            Dashes = new DoubleCollection();
         }
 
 
@@ -62,6 +68,9 @@ namespace MyPaint
         {
             this.KeyDown += new KeyEventHandler(PaintCanvas_KeyDown);
             this.KeyUp += new KeyEventHandler(PaintCanvas_KeyUp);
+
+            initHandleColorClick();
+            initHandleShapeToolClick();
 
             // Thêm các kiểu brush vào combobox
             PoPulateBorderStyle();
@@ -75,6 +84,26 @@ namespace MyPaint
             // Thêm Adorner cho Canvas
             AdornerLayer aLayer = AdornerLayer.GetAdornerLayer(PaintCanvas);
             aLayer.Add(new MyPaint.Adorners.ResizingAdorner(PaintCanvas));
+        }
+
+        private void initHandleShapeToolClick()
+        {
+            btnLineTool.Click += ShapeToolClick;
+            btnRectangleTool.Click += ShapeToolClick;
+            btnEllipseTool.Click += ShapeToolClick;
+            btnArrowTool.Click += ShapeToolClick;
+        }
+
+        private void initHandleColorClick()
+        {
+            btnColorFF00A2E8.Click += ColorClickHandle;
+            btnColorFF22B14C.Click += ColorClickHandle;
+            btnColorFF3F48CC.Click += ColorClickHandle;
+            btnColorFFA349A4.Click += ColorClickHandle;
+            btnColorFFED1C24.Click += ColorClickHandle;
+            btnColorFFFF7F27.Click += ColorClickHandle;
+            btnColorFFFFC90E.Click += ColorClickHandle;
+            btnColorNoneColor.Click += ColorClickHandle;
         }
 
         private void PopulateFillStyle()
@@ -134,91 +163,29 @@ namespace MyPaint
             // Bỏ chọn adorner cho các shape
             unSelectedTheLastChildrenOfCanvas();
 
-            if (rtbText != null)
+            // Không cho sửa text
+            MakeRichTextBoxReadOnly();
+
+            // Loại bỏ contentcontrol của shape đang chọn
+            if (isSelectShape)
             {
-                rtbText.BorderThickness = new Thickness(0);
-                rtbText.IsReadOnly = true;
-                rtbText.IsDocumentEnabled = false;
-                rtbText.Cursor = Cursors.None;
+                var control = PaintCanvas.Children[PaintCanvas.Children.Count - 1];
+                ContentControl cc = (ContentControl)control;
+                cc.Style = null;
             }
 
-            #region Đang chế độ tô loang
+            // Xóa bỏ vùng chọn của selectiontool
+            if (isSelectionTool)
+                PaintCanvas.Children.RemoveAt(PaintCanvas.Children.Count - 1);
 
-            if (drawElementType == (int)DrawElementType.Fill)
-            {
-                System.Drawing.Bitmap bmp = renderCanvasToBitmap();
-
-                // Lay mau can fill
-                Color c = ((SolidColorBrush)btnFillColor.Background as SolidColorBrush).Color;
-                System.Drawing.Color fillColor = System.Drawing.Color.FromArgb(c.A, c.R, c.G, c.B);
-
-                // Lấy màu Pixel gốc
-                System.Drawing.Color colorOfOriginPixel = bmp.GetPixel((int)StartPoint.X, (int)StartPoint.Y);
-
-                System.Drawing.Bitmap bitmap = fillBitmap((int)StartPoint.X, (int)StartPoint.Y, fillColor, colorOfOriginPixel, bmp);
-
-                BitmapSource bms = System.Windows.Interop.Imaging.CreateBitmapSourceFromHBitmap(bmp.GetHbitmap(), IntPtr.Zero, Int32Rect.Empty, BitmapSizeOptions.FromEmptyOptions());
-
-                Image image = new Image();
-                image.Source = bms;
-                PaintCanvas.Children.Add(image);
-
-                return;
-            }
-
-            #endregion
-
-            #region Đang chọn vẽ shape
-
-            if (shape != null && drawElementType != (int)DrawElementType.Text && drawElementType != (int)DrawElementType.Fill)
-            {
-                shape.StrokeColorBrush = strokeBrush;
-                shape.StrokeThickness = strokeThicknessSize;
-                shape.FillColorBrush = fillBrush;
-                shape.StartPoint = e.GetPosition(PaintCanvas);
-                shape.StrokeType = new DoubleCollection(dashes);
-                Style controlStyle = (Style)FindResource("DesignerItemStyle");
-
-                // Selection tool
-                if (drawElementType == (int)DrawElementType.SelectionTool)
-                {
-                    DoubleCollection dashesTemp = new DoubleCollection();
-                    dashesTemp.Add(0.5);
-
-                    shape.StrokeColorBrush = System.Windows.Media.Brushes.Blue;
-                    shape.StrokeThickness = 1;
-                    shape.FillColorBrush = System.Windows.Media.Brushes.Transparent;
-                    shape.StrokeType = new DoubleCollection(dashesTemp);
-                }
-
-                if (controlStyle != null)
-                    shape.controlStyle = controlStyle;
-
-                // Bỏ đối tượng đang được hiện anchor
-                if (PaintCanvas.Children.Count >= 1)
-                {
-                    unSelectedTheLastChildrenOfCanvas();
-
-                    if (isSelectShape)
-                    {
-                        var control = PaintCanvas.Children[PaintCanvas.Children.Count - 1];
-                        ContentControl cc = (ContentControl)control;
-
-                        // Không cho thay đổi hình đã vẽ
-                        cc.Style = null;
-                    }
-
-                    // Xóa bỏ ContentControl nếu đang là SelectionTool
-                    if (isSelectionTool)
-                        PaintCanvas.Children.RemoveAt(PaintCanvas.Children.Count - 1);
-                }
-            }
+            // Khởi tạo vẽ hình
+            if (shape != null && DrawType == (int)DrawElementType.Shape)
+                initShape();
 
             isSelectShape = false;
             isSelectionTool = false;
-
-            #endregion
         }
+
 
         // MouseButtonUp Event
         private void PaintCanvas_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
@@ -226,9 +193,7 @@ namespace MyPaint
             isMouseDown = false;
             EndPoint = e.GetPosition(PaintCanvas);
 
-            #region Vẽ shape
-
-            if (shape != null && StartPoint != EndPoint && drawElementType != (int)DrawElementType.Text && drawElementType != (int)DrawElementType.Fill)
+            if (shape != null && StartPoint != EndPoint && DrawType == (int)DrawElementType.Shape)
             {
                 shape.removeShape(PaintCanvas.Children);
 
@@ -240,37 +205,11 @@ namespace MyPaint
                 selectedTheLastChildrenOfCanvas();
 
                 // Shape này là SelectionTool
-                isSelectionTool = (drawElementType == (int)DrawElementType.SelectionTool) ? true : false;
+                isSelectionTool = (DrawType == (int)DrawElementType.SelectionTool) ? true : false;
             }
 
-            #endregion
-
-            #region Chèn văn bản
-
-            if (drawElementType == (int)DrawElementType.Text)
-            {
-                int fontSize = int.Parse(cbSizeText.Text);
-                string fontFamilies = cbFontText.Text;
-
-                rtbText = new System.Windows.Controls.RichTextBox()
-                {
-                    MinHeight = 12,
-                    MinWidth = 200,
-                    AcceptsReturn = true,
-                    IsUndoEnabled = true,
-                    FontSize = fontSize,
-                    FontFamily = new FontFamily(fontFamilies),
-                    BorderThickness = new Thickness(0.5),
-                    Background = System.Windows.Media.Brushes.Transparent,
-                };
-
-                Canvas.SetLeft(rtbText, StartPoint.X);
-                Canvas.SetTop(rtbText, StartPoint.Y);
-
-                PaintCanvas.Children.Add(rtbText);
-            }
-
-            #endregion
+            if (DrawType == (int)DrawElementType.Text)
+                InsertNewRichTextBox();
         }
 
         // MouseMove envent
@@ -283,58 +222,64 @@ namespace MyPaint
             }
         }
 
-        #endregion
 
-        #region Shape Tool Click Event
-
-        // Line tool
-        private void btnLineTool_Click(object sender, RoutedEventArgs e)
+        private void initShape()
         {
-            //shape = new TLine();
-            shape = shapeCreator.createNewShape("TLine");
-            drawElementType = (int)DrawElementType.Line;
+            shape.StrokeColorBrush = StrokeBrush;
+            shape.StrokeThickness = StrokeThicknessSize;
+            shape.FillColorBrush = FillBrush;
+            shape.StartPoint = StartPoint;
+            shape.StrokeType = new DoubleCollection(Dashes);
+            Style controlStyle = (Style)FindResource("DesignerItemStyle");
+
+            // Selection tool
+            if (DrawType == (int)DrawElementType.SelectionTool)
+            {
+                DoubleCollection dashesTemp = new DoubleCollection();
+                dashesTemp.Add(0.5);
+
+                shape.StrokeColorBrush = System.Windows.Media.Brushes.Blue;
+                shape.StrokeThickness = 1;
+                shape.FillColorBrush = System.Windows.Media.Brushes.Transparent;
+                shape.StrokeType = new DoubleCollection(dashesTemp);
+            }
+
+            if (controlStyle != null)
+                shape.controlStyle = controlStyle;
         }
 
-        // Rectangle tool
-        private void btnRectangleTool_Click(object sender, RoutedEventArgs e)
+        private void MakeRichTextBoxReadOnly()
         {
-            shape = shapeCreator.createNewShape("TRectangle");
-            drawElementType = (int)DrawElementType.Rectangle;
+            if (rtbText != null)
+            {
+                rtbText.BorderThickness = new Thickness(0);
+                rtbText.IsReadOnly = true;
+                rtbText.IsDocumentEnabled = false;
+                rtbText.Cursor = Cursors.None;
+            }
         }
 
-        // Ellipse tool
-        private void btnEllipseTool_Click(object sender, RoutedEventArgs e)
+        private void InsertNewRichTextBox()
         {
-            shape = new TEllipse();
-            drawElementType = (int)DrawElementType.Ellipse;
-        }
+            int fontSize = int.Parse(cbSizeText.Text);
+            string fontFamilies = cbFontText.Text;
 
-        // Arrow tool
-        private void btnArrowTool_Click(object sender, RoutedEventArgs e)
-        {
-            shape = new TArrow();
-            drawElementType = (int)DrawElementType.Arrow;
-        }
+            rtbText = new RichTextBox()
+            {
+                MinHeight = 12,
+                MinWidth = 200,
+                AcceptsReturn = true,
+                IsUndoEnabled = true,
+                FontSize = fontSize,
+                FontFamily = new FontFamily(fontFamilies),
+                BorderThickness = new Thickness(0.5),
+                Background = System.Windows.Media.Brushes.Transparent,
+            };
 
-        // Heart tool
-        private void btnHeartTool_Click(object sender, RoutedEventArgs e)
-        {
-            shape = new THeart();
-            drawElementType = (int)DrawElementType.Heart;
-        }
+            Canvas.SetLeft(rtbText, StartPoint.X);
+            Canvas.SetTop(rtbText, StartPoint.Y);
 
-        // OvalCallOut tool
-        private void btnOvalCalloutTool_Click(object sender, RoutedEventArgs e)
-        {
-            shape = new TOvalCallout();
-            drawElementType = (int)DrawElementType.OvalCallOut;
-        }
-
-        // Star tool
-        private void btnStarTool_Click(object sender, RoutedEventArgs e)
-        {
-            //shape = new TStar();
-            //drawElementType = (int)DrawElementType.Star;
+            PaintCanvas.Children.Add(rtbText);
         }
 
         #endregion
@@ -349,41 +294,92 @@ namespace MyPaint
 
         #endregion
 
-        #region Color
-
-        public void setFillStrokeColor(String colorHex)
+        private void ShapeToolClick(object sender, RoutedEventArgs e)
         {
-            if (isStrokeColorPress == true)
-            {
-                strokeBrush = (SolidColorBrush)(new BrushConverter().ConvertFrom(colorHex));
+            Button btn = (Button)sender;
 
-                btnStrokeColor.Background = (SolidColorBrush)(new BrushConverter().ConvertFrom(colorHex));
-                colorPicker.SelectedColor = strokeBrush.Color;
+            if (btn == btnLineTool)
+                shape = ShapeCreator.createNewShape("TLine");
+
+            else if (btn == btnArrowTool)
+                shape = ShapeCreator.createNewShape("TArrow");
+
+            else if (btn == btnRectangleTool)
+                shape = ShapeCreator.createNewShape("TRectangle");
+
+            else if (btn == btnEllipseTool)
+                shape = ShapeCreator.createNewShape("TEllipse");
+
+            DrawType = (int)DrawElementType.Shape;
+
+        }
+
+        private void ColorClickHandle(object sender, RoutedEventArgs e)
+        {
+            SolidColorBrush color = null;
+            Button btn = (Button)sender;
+
+            if (btn == btnColorNoneColor)
+                color = MyColorConverter.convertToSolidColor("#00FFFFFF");
+
+            if (btn == btnColorFF00A2E8)
+                color = MyColorConverter.convertToSolidColor("#FF00A2E8");
+
+            if (btn == btnColorFFA349A4)
+                color = MyColorConverter.convertToSolidColor("#FFA349A4");
+
+            if (btn == btnColorFFFF7F27)
+                color = MyColorConverter.convertToSolidColor("#FFFF7F27");
+
+            if (btn == btnColorFFED1C24)
+                color = MyColorConverter.convertToSolidColor("#FFED1C24");
+
+
+            if (btn == btnColorFF3F48CC)
+                color = MyColorConverter.convertToSolidColor("#FF3F48CC");
+
+            if (btn == btnColorFF22B14C)
+                color = MyColorConverter.convertToSolidColor("#FF22B14C");
+
+
+            if (btn == btnColorFFFFC90E)
+                color = MyColorConverter.convertToSolidColor("#FFFFC90E");
+
+            if (color != null)
+                updateFillStrokeColor(color);
+        }
+
+        public void updateFillStrokeColor(Brush color)
+        {
+            if (isStrokeColorPress)
+            {
+                btnStrokeColor.Background = color;
+                colorPicker.SelectedColor = (StrokeBrush as SolidColorBrush).Color;
+                StrokeBrush = color;
 
                 // Cập nhật màu nếu đang chọn shape
                 if (isSelectShape)
-                {
-                    shape.StrokeColorBrush = strokeBrush;
-                    shape.updateShapeStyle(PaintCanvas.Children);
-                }
+                    shape.StrokeColorBrush = StrokeBrush;
             }
-            else if (isFillColorPress == true)
+            else if (isFillColorPress)
             {
                 // Thay đổi thuộc tính fill thành solid color
                 cbFillStyle.SelectedIndex = 0;
+                btnFillColor.Background = color;
+                colorPicker.SelectedColor = (FillBrush as SolidColorBrush).Color;
 
-                fillBrush = (SolidColorBrush)(new BrushConverter().ConvertFrom(colorHex));
-
-                btnFillColor.Background = (SolidColorBrush)(new BrushConverter().ConvertFrom(colorHex));
-                colorPicker.SelectedColor = (fillBrush as SolidColorBrush).Color;
+                FillBrush = color;
 
                 // Cập nhật màu nếu đang chọn shape
                 if (isSelectShape)
-                {
-                    shape.FillColorBrush = fillBrush;
-                    shape.updateShapeStyle(PaintCanvas.Children);
-                }
+                    shape.FillColorBrush = FillBrush;
             }
+
+            // Update shape, text color
+            if (isSelectShape)
+                shape.updateShapeStyle(PaintCanvas.Children);
+            else
+                changeColorText(color);
 
         }
 
@@ -391,39 +387,14 @@ namespace MyPaint
         private void colorPicker_SelectedColorChanged(object sender, RoutedPropertyChangedEventArgs<Color?> e)
         {
             SolidColorBrush newColor = new SolidColorBrush((Color)colorPicker.SelectedColor);
-            if (isStrokeColorPress == true)
-            {
-                strokeBrush = newColor;
-                btnStrokeColor.Background = newColor;
-
-                // Cập nhật màu nếu đang chọn shape
-                if (isSelectShape)
-                {
-                    shape.StrokeColorBrush = strokeBrush;
-                    shape.updateShapeStyle(PaintCanvas.Children);
-                }
-            }
-            else if (isFillColorPress == true)
-            {
-                fillBrush = newColor;
-                btnFillColor.Background = newColor;
-
-                // Cập nhật màu nếu đang chọn shape
-                if (isSelectShape)
-                {
-                    shape.FillColorBrush = fillBrush;
-                    shape.updateShapeStyle(PaintCanvas.Children);
-                }
-            }
-
-            changeColorText(newColor);
+            updateFillStrokeColor(newColor);
         }
 
         // StrokeColor Button Click
         private void btnStrokeColor_Click(object sender, RoutedEventArgs e)
         {
-            setButtonBorderAndThickness(btnStrokeColor, (SolidColorBrush)(new BrushConverter().ConvertFrom("#000000")), 2);
-            setButtonBorderAndThickness(btnFillColor, (SolidColorBrush)(new BrushConverter().ConvertFrom("#000000")), 0.3);
+            setButtonBorderAndThickness(btnStrokeColor, MyColorConverter.convertToSolidColor("#000000"), 2);
+            setButtonBorderAndThickness(btnFillColor, MyColorConverter.convertToSolidColor("#000000"), 0.3);
 
             isStrokeColorPress = true;
             isFillColorPress = false;
@@ -432,77 +403,19 @@ namespace MyPaint
         // FillColor Button Click
         private void btnFillColor_Click(object sender, RoutedEventArgs e)
         {
-            setButtonBorderAndThickness(btnStrokeColor, (SolidColorBrush)(new BrushConverter().ConvertFrom("#000000")), 0.3);
-            setButtonBorderAndThickness(btnFillColor, (SolidColorBrush)(new BrushConverter().ConvertFrom("#000000")), 2);
+            setButtonBorderAndThickness(btnStrokeColor, MyColorConverter.convertToSolidColor("#000000"), 0.3);
+            setButtonBorderAndThickness(btnFillColor, MyColorConverter.convertToSolidColor("#000000"), 2);
 
             isStrokeColorPress = false;
             isFillColorPress = true;
         }
 
-        private void btnColorNoneColor_Click(object sender, RoutedEventArgs e)
-        {
-            setFillStrokeColor("#00FFFFFF");
-            SolidColorBrush newColor = (SolidColorBrush)(new BrushConverter().ConvertFrom("#00FFFFFF"));
-            changeColorText(newColor);
-        }
-
-        private void btnColorFF00A2E8_Click(object sender, RoutedEventArgs e)
-        {
-            setFillStrokeColor("#FF00A2E8");
-            SolidColorBrush newColor = (SolidColorBrush)(new BrushConverter().ConvertFrom("#FF00A2E8"));
-            changeColorText(newColor);
-        }
-
-        private void btnColorFFA349A4_Click(object sender, RoutedEventArgs e)
-        {
-            setFillStrokeColor("#FFA349A4");
-            SolidColorBrush newColor = (SolidColorBrush)(new BrushConverter().ConvertFrom("#FFA349A4"));
-            changeColorText(newColor);
-        }
-
-        private void btnColorFFFF7F27_Click(object sender, RoutedEventArgs e)
-        {
-            setFillStrokeColor("#FFFF7F27");
-            SolidColorBrush newColor = (SolidColorBrush)(new BrushConverter().ConvertFrom("#FFFF7F27"));
-            changeColorText(newColor);
-        }
-
-        private void btnColorFFED1C24_Click(object sender, RoutedEventArgs e)
-        {
-            setFillStrokeColor("#FFED1C24");
-            SolidColorBrush newColor = (SolidColorBrush)(new BrushConverter().ConvertFrom("#FFED1C24"));
-            changeColorText(newColor);
-        }
-
-        private void btnColorFF3F48CC_Click(object sender, RoutedEventArgs e)
-        {
-            setFillStrokeColor("#FF3F48CC");
-            SolidColorBrush newColor = (SolidColorBrush)(new BrushConverter().ConvertFrom("#FF3F48CC"));
-            changeColorText(newColor);
-        }
-
-        private void btnColorFF22B14C_Click(object sender, RoutedEventArgs e)
-        {
-            setFillStrokeColor("#FF22B14C");
-            SolidColorBrush newColor = (SolidColorBrush)(new BrushConverter().ConvertFrom("#FF22B14C"));
-            changeColorText(newColor);
-        }
-
-        private void btnColorFFFFC90E_Click(object sender, RoutedEventArgs e)
-        {
-            setFillStrokeColor("#FFFFC90E");
-            SolidColorBrush newColor = (SolidColorBrush)(new BrushConverter().ConvertFrom("#FFFFC90E"));
-            changeColorText(newColor);
-        }
-
-        #endregion
-
         #region Stroke
 
         // Đặt kích thước stroke
-        public void setStrokeThickness(int strokeThicknessSize)
+        public void setStrokeThickness(double strokeThicknessSize)
         {
-            this.strokeThicknessSize = strokeThicknessSize;
+            StrokeThicknessSize = strokeThicknessSize;
 
             // Cập nhật kích thước stroke nếu đang chọn shape
             if (isSelectShape)
@@ -539,23 +452,23 @@ namespace MyPaint
         // Thay đổi kiể Border
         private void cbBorderStyle_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            dashes.Clear();
+            Dashes.Clear();
             switch (cbBorderStyle.SelectedIndex)
             {
                 case 0:
                     break;
                 case 1:
-                    dashes.Add(0.5);
+                    Dashes.Add(0.5);
                     break;
                 case 2:
-                    dashes.Add(4);
+                    Dashes.Add(4);
                     break;
             }
 
             // Cập nhật brush nếu đang chọn shape
             if (isSelectShape)
             {
-                shape.StrokeType = new DoubleCollection(dashes);
+                shape.StrokeType = new DoubleCollection(Dashes);
                 shape.updateShapeStyle(PaintCanvas.Children);
             }
         }
@@ -565,83 +478,43 @@ namespace MyPaint
         {
             if (isFillColorPress)
             {
+                FillShapeHelper fillShapeHelper = null;
                 switch (cbFillStyle.SelectedIndex)
                 {
                     case 0:
-                        fillBrush = (SolidColorBrush)btnFillColor.Background;
+                        fillShapeHelper = new SolidFillHelper();
                         break;
 
-                    // Linear gradient
                     case 1:
-                        fillBrush = (SolidColorBrush)btnFillColor.Background;
-                        LinearGradientBrush lgb = new LinearGradientBrush();
-                        Color c = (fillBrush as SolidColorBrush).Color;
-
-                        lgb.GradientStops.Add(new GradientStop(c, 1.0));
-                        lgb.GradientStops.Add(new GradientStop(Colors.White, 0.0));
-
-                        fillBrush = lgb;
+                        fillShapeHelper = new LinearGradientHelper();
                         break;
 
-                    //Radial gradient
                     case 2:
-                        fillBrush = (SolidColorBrush)btnFillColor.Background;
-                        RadialGradientBrush rgb = new RadialGradientBrush();
-                        Color c1 = (fillBrush as SolidColorBrush).Color;
-
-                        rgb.GradientStops.Add(new GradientStop(c1, 1.0));
-                        rgb.GradientStops.Add(new GradientStop(Colors.White, 0.0));
-
-                        fillBrush = rgb;
+                        fillShapeHelper = new RadialGradientHelper();
                         break;
 
-                    // Black and White checker
                     case 3:
-                        DrawingBrush myBrush = new DrawingBrush();
-
-                        GeometryDrawing backgroundSquare = new GeometryDrawing(Brushes.White, null, new RectangleGeometry(new Rect(0, 0, 50, 50)));
-
-                        GeometryGroup aGeometryGroup = new GeometryGroup();
-                        aGeometryGroup.Children.Add(new RectangleGeometry(new Rect(0, 0, 25, 25)));
-                        aGeometryGroup.Children.Add(new RectangleGeometry(new Rect(25, 25, 25, 25)));
-
-                        LinearGradientBrush checkerBrush = new LinearGradientBrush();
-                        checkerBrush.GradientStops.Add(new GradientStop(Colors.Black, 0.0));
-                        checkerBrush.GradientStops.Add(new GradientStop(Colors.Gray, 1.0));
-
-                        GeometryDrawing checkers = new GeometryDrawing(checkerBrush, null, aGeometryGroup);
-
-                        DrawingGroup checkersDrawingGroup = new DrawingGroup();
-                        checkersDrawingGroup.Children.Add(backgroundSquare);
-                        checkersDrawingGroup.Children.Add(checkers);
-
-                        myBrush.Drawing = checkersDrawingGroup;
-                        myBrush.Viewport = new Rect(0, 0, 0.25, 0.25);
-                        myBrush.TileMode = TileMode.Tile;
-
-                        fillBrush = myBrush;
+                        fillShapeHelper = new CaroFillHelper();
                         break;
 
-                    // Fill by image
                     case 4:
-                        Microsoft.Win32.OpenFileDialog openFileDialog = new Microsoft.Win32.OpenFileDialog();
-                        openFileDialog.Filter = "Png Image|*.png|Jpg Image|*.jpg|Bitmap Image|*.bmp";
-                        openFileDialog.FileName = "MyPaint";
-                        openFileDialog.DefaultExt = ".png";
-
-                        if ((bool)openFileDialog.ShowDialog())
-                        {
-                            ImageBrush image = new ImageBrush();
-                            image.ImageSource = new BitmapImage(new Uri(@openFileDialog.FileName, UriKind.Relative));
-                            fillBrush = image;
-                        }
+                        fillShapeHelper = new ImageFillHelper();
                         break;
+
+                    default:
+                        break;
+                }
+
+                if (fillShapeHelper != null)
+                {
+                    Brush color = (SolidColorBrush)btnFillColor.Background;
+                    FillBrush = fillShapeHelper.GetBrush(color);
                 }
 
                 // Cập nhật shape nếu đang chọn shape
                 if (isSelectShape)
                 {
-                    shape.FillColorBrush = fillBrush;
+                    shape.FillColorBrush = FillBrush;
                     shape.updateShapeStyle(PaintCanvas.Children);
                 }
             }
@@ -683,44 +556,6 @@ namespace MyPaint
             }
         }
 
-        // Save image
-        public bool saveCanvasImage(int dpi, string ext, string fileName)
-        {
-            Rect bounds = VisualTreeHelper.GetDescendantBounds(PaintCanvas);
-            RenderTargetBitmap rtb = new RenderTargetBitmap((Int32)bounds.Width, (Int32)bounds.Height, 96, 96, PixelFormats.Pbgra32);
-            DrawingVisual dv = new DrawingVisual();
-
-            using (DrawingContext dc = dv.RenderOpen())
-            {
-                VisualBrush vb = new VisualBrush(PaintCanvas);
-                dc.DrawRectangle(vb, null, new Rect(new Point(), bounds.Size));
-            }
-            rtb.Render(dv);
-
-            BitmapEncoder encoder;
-            switch (ext.ToLower())
-            {
-                case ".png":
-                    encoder = new PngBitmapEncoder();
-                    break;
-                case ".jpg":
-                    encoder = new JpegBitmapEncoder();
-                    break;
-                case ".bmp":
-                    encoder = new BmpBitmapEncoder();
-                    break;
-                default:
-                    return false;
-            }
-
-            encoder.Frames.Add(BitmapFrame.Create(rtb));
-            using (var stm = System.IO.File.Create(fileName))
-            {
-                encoder.Save(stm);
-            }
-            return true;
-        }
-
         private void btnSaveImage_Click(object sender, RoutedEventArgs e)
         {
             Microsoft.Win32.SaveFileDialog saveDialog = new Microsoft.Win32.SaveFileDialog();
@@ -731,7 +566,8 @@ namespace MyPaint
             if ((bool)saveDialog.ShowDialog())
             {
                 String ext = System.IO.Path.GetExtension(saveDialog.FileName);
-                bool saved = saveCanvasImage(96, ext, saveDialog.FileName);
+                bool saved = BitmapHelper.saveCanvasImage(96, ext, saveDialog.FileName, PaintCanvas);
+
                 if (saved)
                     System.Windows.MessageBox.Show("Save done!", "Save Image");
                 else
@@ -789,58 +625,13 @@ namespace MyPaint
 
         private void btnSelect_Click(object sender, RoutedEventArgs e)
         {
-            drawElementType = (int)DrawElementType.SelectionTool;
+            DrawType = (int)DrawElementType.SelectionTool;
             shape = new TRectangle();
 
             setButtonBorderAndThickness(btnSelect, (SolidColorBrush)(new BrushConverter().ConvertFrom("#CFD8DC")), 1);
             setButtonBorderAndThickness(btnRectangleTool, System.Windows.Media.Brushes.Transparent, 0);
             setButtonBorderAndThickness(btnLineTool, System.Windows.Media.Brushes.Transparent, 0);
             setButtonBorderAndThickness(btnEllipseTool, System.Windows.Media.Brushes.Transparent, 0);
-        }
-
-        public System.Drawing.Bitmap renderCanvasToBitmap()
-        {
-            Rect bounds = VisualTreeHelper.GetDescendantBounds(PaintCanvas);
-            RenderTargetBitmap rtb = new RenderTargetBitmap((Int32)bounds.Width, (Int32)bounds.Height, 96, 96, PixelFormats.Pbgra32);
-            DrawingVisual dv = new DrawingVisual();
-
-            using (DrawingContext dc = dv.RenderOpen())
-            {
-                VisualBrush vb = new VisualBrush(PaintCanvas);
-                dc.DrawRectangle(vb, null, new Rect(new Point(), bounds.Size));
-            }
-
-            rtb.Render(dv);
-            BitmapEncoder encoder = new BmpBitmapEncoder();
-            encoder.Frames.Add(BitmapFrame.Create(rtb));
-
-            using (MemoryStream ms = new MemoryStream())
-            {
-                encoder.Save(ms);
-                ms.Seek(0, SeekOrigin.Begin);
-
-                // Tạo một Bitmap
-                System.Drawing.Bitmap bmp = new System.Drawing.Bitmap(ms);
-
-                return bmp;
-            }
-        }
-
-        // Tạo CroppedBitmap
-        public CroppedBitmap createCroppedBitmapImage(System.Drawing.Bitmap bmp, Point StartPoint, Point EndPoint)
-        {
-            // Tạo BitmapSource từ Bitmap
-            IntPtr hBitmap = bmp.GetHbitmap();
-            BitmapSource bms = System.Windows.Interop.Imaging.CreateBitmapSourceFromHBitmap(hBitmap, IntPtr.Zero, Int32Rect.Empty, BitmapSizeOptions.FromEmptyOptions());
-
-            // Tạo 1 CroppedBitmap được cắt theo vùng chọn
-            double width = Math.Abs(StartPoint.X - EndPoint.X);
-            double height = Math.Abs(StartPoint.Y - EndPoint.Y);
-            CroppedBitmap cb = new CroppedBitmap(bms, new Int32Rect((int)Math.Min(StartPoint.X, EndPoint.X), (int)Math.Min(StartPoint.Y, EndPoint.Y), (int)width, (int)height));
-
-            bmp.Dispose();
-
-            return cb;
         }
 
         // Copy
@@ -855,12 +646,11 @@ namespace MyPaint
                 }
 
                 // Tạo CroppedBitmap lưu vào Clipboard
-                System.Drawing.Bitmap bmp = renderCanvasToBitmap();
-                CroppedBitmap cb = createCroppedBitmapImage(bmp, StartPoint, EndPoint);
+                System.Drawing.Bitmap bmp = BitmapHelper.renderCanvasToBitmap(PaintCanvas);
+                CroppedBitmap cb = BitmapHelper.createCroppedBitmapImage(bmp, StartPoint, EndPoint);
+
                 if (cb != null)
-                {
                     Clipboard.SetImage(cb);
-                }
             }
         }
 
@@ -925,12 +715,11 @@ namespace MyPaint
                 Canvas.SetTop(rect, Math.Min(StartPoint.Y, EndPoint.Y));
 
                 // Lưu CroppedBitmapImage vào Clipboard
-                System.Drawing.Bitmap bmp = renderCanvasToBitmap();
-                CroppedBitmap cb = createCroppedBitmapImage(bmp, StartPoint, EndPoint);
+                System.Drawing.Bitmap bmp = BitmapHelper.renderCanvasToBitmap(PaintCanvas);
+                CroppedBitmap cb = BitmapHelper.createCroppedBitmapImage(bmp, StartPoint, EndPoint);
+
                 if (cb != null)
-                {
                     Clipboard.SetImage(cb);
-                }
 
                 PaintCanvas.Children.Add(rect);
             }
@@ -944,7 +733,7 @@ namespace MyPaint
 
         private void btnInsertText_Click(object sender, RoutedEventArgs e)
         {
-            drawElementType = (int)DrawElementType.Text;
+            DrawType = (int)DrawElementType.Text;
         }
 
         // Thay đổi 1 loại thuộc tính dp cho văn bản đang chọn
@@ -977,17 +766,13 @@ namespace MyPaint
         }
 
         // Thay đổi màu sắc văn bản, đổ màu văn bản
-        public void changeColorText(SolidColorBrush newColor)
+        public void changeColorText(Brush newColor)
         {
             if (isStrokeColorPress)
-            {
                 changePropertyText(TextElement.ForegroundProperty, newColor);
-            }
 
             if (isFillColorPress)
-            {
                 changePropertyText(TextElement.BackgroundProperty, newColor);
-            }
         }
 
         #region Bold, Italic, Underline
@@ -1050,121 +835,12 @@ namespace MyPaint
 
         #endregion
 
-        #region To loang
+        private void btnLoadShapePlugin_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
 
         private void btnFill_Click(object sender, RoutedEventArgs e)
-        {
-            drawElementType = (int)DrawElementType.Fill;
-        }
-
-        public void fillRow(int x, int y, System.Drawing.Color fillColor, System.Drawing.Color colorOfOriginPixel, System.Drawing.Bitmap bitmap)
-        {
-            int x1 = x;
-
-            // Tô nửa bên trái của dòng
-            while (x1 > 0 && (bitmap.GetPixel(x1, y) == colorOfOriginPixel))
-            {
-                bitmap.SetPixel(x1, y, fillColor);
-                x1--;
-            }
-
-            x1 = x + 1;
-            // Tô nửa bên phải dòng
-            while (x1 < bitmap.Width && (bitmap.GetPixel(x1, y) == colorOfOriginPixel))
-            {
-                bitmap.SetPixel(x1, y, fillColor);
-                x1++;
-            }
-        }
-
-        public void fillColumn(int x, int y, System.Drawing.Color fillColor, System.Drawing.Color colorOfOriginPixel, System.Drawing.Bitmap bitmap)
-        {
-            int y1 = y - 1;
-            // Tô nửa dưới cột
-            while (y1 > 0 && (bitmap.GetPixel(x, y1) == colorOfOriginPixel))
-            {
-                bitmap.SetPixel(x, y1, fillColor);
-                y1--;
-            }
-
-            y1 = y + 1;
-            // Tô nửa trên cột
-            while (y1 < bitmap.Height && (bitmap.GetPixel(x, y1) == colorOfOriginPixel))
-            {
-                bitmap.SetPixel(x, y1, fillColor);
-                y1++;
-            }
-        }
-
-        public System.Drawing.Bitmap fillBitmap(int x, int y, System.Drawing.Color fillColor, System.Drawing.Color colorOfOriginPixel, System.Drawing.Bitmap bitmap)
-        {
-            // Nếu màu pixel trùng màu cần fill thì không cần tô
-            if (fillColor == colorOfOriginPixel)
-                return bitmap;
-
-            int x1 = x - 1;
-            int y1 = y;
-
-            #region Chạy nửa dưới y
-
-            while (y1 >= 0 && (bitmap.GetPixel(x, y1) == colorOfOriginPixel))
-            {
-                fillRow(x, y1, fillColor, colorOfOriginPixel, bitmap);
-
-                // Chạy nửa bên trái y1
-                while (x1 > 0 && bitmap.GetPixel(x1, y1) == colorOfOriginPixel)
-                {
-                    fillColumn(x1, y1, fillColor, colorOfOriginPixel, bitmap);
-                    x1--;
-                }
-
-                //Chạy nửa bên phải y1
-                x1 = x + 1;
-                while (x1 < bitmap.Width && (bitmap.GetPixel(x1, y1) == colorOfOriginPixel))
-                {
-                    fillColumn(x1, y1, fillColor, colorOfOriginPixel, bitmap);
-                    x1++;
-                }
-                y1--;
-            }
-
-            #endregion
-
-            #region Chạy nửa trên y
-
-            x1 = x;
-            y1 = y + 1;
-
-            while (y1 < bitmap.Height && (bitmap.GetPixel(x, y1) == colorOfOriginPixel))
-            {
-                fillRow(x, y1, fillColor, colorOfOriginPixel, bitmap);
-
-                // Chạy nửa bên trái y1
-                while (x1 > 0 && bitmap.GetPixel(x1, y1) == colorOfOriginPixel)
-                {
-                    fillColumn(x1, y1, fillColor, colorOfOriginPixel, bitmap);
-                    x1--;
-                }
-
-                //Chạy nửa bên phải y1
-                x1 = x + 1;
-                while (x1 < bitmap.Width && (bitmap.GetPixel(x1, y1) == colorOfOriginPixel))
-                {
-                    fillColumn(x1, y1, fillColor, colorOfOriginPixel, bitmap);
-                    x1++;
-                }
-
-                y1++;
-            }
-
-            #endregion
-
-            return bitmap;
-        }
-
-        #endregion
-
-        private void btnLoadShapePlugin_Click(object sender, RoutedEventArgs e)
         {
 
         }

@@ -12,7 +12,7 @@ namespace MyPaint
 {
     public class BitmapHelper
     {
-        public bool saveCanvasImage(int dpi, string ext, string fileName, Canvas paintCanvas)
+        public static bool saveCanvasImage(int dpi, string ext, string fileName, Canvas paintCanvas)
         {
             Rect bounds = VisualTreeHelper.GetDescendantBounds(paintCanvas);
             RenderTargetBitmap rtb = new RenderTargetBitmap((Int32)bounds.Width, (Int32)bounds.Height, 96, 96, PixelFormats.Pbgra32);
@@ -49,7 +49,7 @@ namespace MyPaint
             return true;
         }
 
-        public System.Drawing.Bitmap renderCanvasToBitmap(Canvas paintCanvas)
+        public static System.Drawing.Bitmap renderCanvasToBitmap(Canvas paintCanvas)
         {
             Rect bounds = VisualTreeHelper.GetDescendantBounds(paintCanvas);
             RenderTargetBitmap rtb = new RenderTargetBitmap((Int32)bounds.Width, (Int32)bounds.Height, 96, 96, PixelFormats.Pbgra32);
@@ -78,7 +78,7 @@ namespace MyPaint
         }
 
         // Tạo CroppedBitmap
-        public CroppedBitmap createCroppedBitmapImage(System.Drawing.Bitmap bmp, Point StartPoint, Point EndPoint)
+        public static CroppedBitmap createCroppedBitmapImage(System.Drawing.Bitmap bmp, Point StartPoint, Point EndPoint)
         {
             // Tạo BitmapSource từ Bitmap
             IntPtr hBitmap = bmp.GetHbitmap();

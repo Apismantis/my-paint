@@ -8,7 +8,7 @@ namespace MyPaint
 {
     public class SolidFillHelper : FillShapeHelper
     {
-        public override Brush GetBrush(SolidColorBrush color)
+        public override Brush GetBrush(Brush color)
         {
             return color;
         }

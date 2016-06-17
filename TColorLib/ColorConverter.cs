@@ -18,5 +18,10 @@ namespace TColorLib
         {
             return (SolidColorBrush)(new BrushConverter().ConvertFrom(colorHex));
         }
+
+        public static Color getColorFromBrush(Brush brush)
+        {
+            return (brush as SolidColorBrush).Color;
+        }
     }
 }

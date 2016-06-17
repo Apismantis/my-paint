@@ -17,7 +17,7 @@ namespace ShapeLib
 
         public Point EndPoint { get; set; }
 
-        public SolidColorBrush StrokeColorBrush { get; set; }
+        public Brush StrokeColorBrush { get; set; }
 
         public Brush FillColorBrush { get; set; }
 
@@ -42,7 +42,7 @@ namespace ShapeLib
             StrokeThickness = 1;
         }
 
-        public TShape(Point startPoint, Point endPoint, SolidColorBrush strokeColorBrush,
+        public TShape(Point startPoint, Point endPoint, Brush strokeColorBrush,
             SolidColorBrush fillColorBrush, DoubleCollection strokeType, double strokeThickness)
         {
             this.StartPoint = startPoint;

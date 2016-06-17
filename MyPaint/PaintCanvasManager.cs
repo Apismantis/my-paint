@@ -277,8 +277,7 @@ namespace MyPaint
         // Save image
         public bool saveCanvasImage(int dpi, string ext, string fileName)
         {
-            BitmapHelper bmpHelper = new BitmapHelper();
-            return bmpHelper.saveCanvasImage(dpi, ext, fileName, paintCanvas);
+            return BitmapHelper.saveCanvasImage(dpi, ext, fileName, paintCanvas);
         }
 
 
@@ -325,9 +324,8 @@ namespace MyPaint
             removeLastChildren();
 
             // Tạo CroppedBitmap lưu vào Clipboard
-            BitmapHelper bmpHelper = new BitmapHelper();
-            System.Drawing.Bitmap bmp = bmpHelper.renderCanvasToBitmap(paintCanvas);
-            CroppedBitmap cb = bmpHelper.createCroppedBitmapImage(bmp, StartPoint, EndPoint);
+            System.Drawing.Bitmap bmp = BitmapHelper.renderCanvasToBitmap(paintCanvas);
+            CroppedBitmap cb = BitmapHelper.createCroppedBitmapImage(bmp, StartPoint, EndPoint);
 
             if (cb != null)
                 Clipboard.SetImage(cb);
@@ -387,9 +385,8 @@ namespace MyPaint
             Canvas.SetTop(rect, Math.Min(StartPoint.Y, EndPoint.Y));
 
             // Lưu CroppedBitmapImage vào Clipboard
-            BitmapHelper bmpHelper = new BitmapHelper();
-            System.Drawing.Bitmap bmp = bmpHelper.renderCanvasToBitmap(paintCanvas);
-            CroppedBitmap cb = bmpHelper.createCroppedBitmapImage(bmp, StartPoint, EndPoint);
+            System.Drawing.Bitmap bmp = BitmapHelper.renderCanvasToBitmap(paintCanvas);
+            CroppedBitmap cb = BitmapHelper.createCroppedBitmapImage(bmp, StartPoint, EndPoint);
 
             if (cb != null)
                 Clipboard.SetImage(cb);

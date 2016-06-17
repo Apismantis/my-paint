@@ -9,7 +9,7 @@ namespace MyPaint
 {
     public class ImageFillHelper : FillShapeHelper
     {
-        public override Brush GetBrush(SolidColorBrush color)
+        public override Brush GetBrush(Brush color)
         {
             Microsoft.Win32.OpenFileDialog openFileDialog = new Microsoft.Win32.OpenFileDialog();
             openFileDialog.Filter = "Png Image|*.png|Jpg Image|*.jpg|Bitmap Image|*.bmp";

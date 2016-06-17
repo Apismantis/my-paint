@@ -9,7 +9,7 @@ namespace MyPaint
 {
     public class CaroFillHelper : FillShapeHelper
     {
-        public override Brush GetBrush(SolidColorBrush color)
+        public override Brush GetBrush(Brush color)
         {
             DrawingBrush caroBrush = new DrawingBrush();
 
