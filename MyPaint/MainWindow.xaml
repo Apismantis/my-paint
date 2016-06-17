@@ -51,35 +51,18 @@
                     <RibbonButton Content="Open" Label="Open" x:Name="btnOpenImage" LargeImageSource="Resources/open.png" HorizontalAlignment="Right" Height="57" Margin="0,0,-43.2,-61" VerticalAlignment="Bottom" Width="43" Click="btnOpenImage_Click"/>
                     <RibbonButton Content="Save" Label="Save" x:Name="btnSaveImage" LargeImageSource="Resources/save.png" HorizontalAlignment="Right" Height="57" Margin="0,0,-96,-61" VerticalAlignment="Bottom" Width="43" Click="btnSaveImage_Click"/>
                 </RibbonGroup>
-
-                <!--Action-->
                 <RibbonGroup Header="Action" Height="90" Margin="0,0,0,-0.4" VerticalAlignment="Top" Width="140">
                     <RibbonButton x:Name="btnUndo" Label="Undo" LargeImageSource="Resources/undo.png" HorizontalAlignment="Left" Height="55" Margin="-1,12,-47.6,-60.6" VerticalAlignment="Top" Width="55" Click="btnUndo_Click"/>
                     <RibbonButton x:Name="btnRedo" Label="Redo" SmallImageSource="Resources/redo.png" HorizontalAlignment="Left" Height="22" Margin="51,-3,-99.6,-12.6" VerticalAlignment="Top" Width="55" Click="btnRedo_Click"/>
                     <RibbonButton x:Name="btnClearAll" Label="Clear All" SmallImageSource="Resources/clearall.png" HorizontalAlignment="Left" Height="22" Margin="51,37,-113.6,-52.6" VerticalAlignment="Top" Width="69" Click="btnClearAll_Click"/>
                     <RibbonButton x:Name="btnDelete" Label="Delete" SmallImageSource="Resources/delete.png" HorizontalAlignment="Left" Height="22" Margin="51,9,-113.6,-24.6" VerticalAlignment="Top" Width="69" Click="btnDelete_Click"/>
                 </RibbonGroup>
-
-                <!--Clipboard-->
                 <RibbonGroup Header="Clipboard" Margin="0,1,0,0.6" Width="129">
                     <RibbonButton x:Name="btnSelect" Label="Select" LargeImageSource="Resources/Selection.png" Margin="0,0,-8.6,-72" HorizontalAlignment="Left" Width="39" Click="btnSelect_Click"/>
                     <RibbonButton x:Name="btnCopy" Label="Copy" SmallImageSource="Resources/copy.png" HorizontalAlignment="Left" Height="22" Margin="56,2,-104.6,-17.6" VerticalAlignment="Top" Width="55" Click="btnCopy_Click"/>
                     <RibbonButton x:Name="btnPaste" Label="Paste" SmallImageSource="Resources/paste.png" HorizontalAlignment="Left" Height="21" Margin="55,42,-101.6,-56.6" VerticalAlignment="Top" Width="53" Click="btnPaste_Click"/>
                     <RibbonButton x:Name="btnCut" Label="Cut" SmallImageSource="Resources/cut.png" HorizontalAlignment="Left" Height="22" Margin="56,13,-104.6,-28.6" VerticalAlignment="Top" Width="55" Click="btnCut_Click"/>
                 </RibbonGroup>
-
-                <!--Text-->
-                <RibbonGroup Header="Text" Height="90" Margin="0,0,0,-0.4" VerticalAlignment="Top" Width="226">
-                    <RibbonButton x:Name="btnInsertText" Label="Insert Text" LargeImageSource="Resources/text.png" HorizontalAlignment="Left" Height="64" Margin="4,6,-47.6,-63.6" VerticalAlignment="Top" Width="50" Click="btnInsertText_Click"/>
-                    <ComboBox x:Name="cbFontText" HorizontalAlignment="Left" Height="23" Margin="64,1,-177,-5.6" VerticalAlignment="Top" Width="141"
-                		ItemsSource="{Binding Source={StaticResource FontCollectionSource}}" SelectionChanged="cbFontText_SelectionChanged" />
-                    <ComboBox x:Name="cbSizeText" HorizontalAlignment="Left" Height="23" Margin="63,15,-76,-16.6" VerticalAlignment="Top" Width="41" SelectionChanged="cbSizeText_SelectionChanged"/>
-                    <RibbonButton x:Name="btnBoldText" SmallImageSource="Resources/bold.png" HorizontalAlignment="Left" Height="Auto" Margin="115,-6,-133.6,-16" Width="25" Click="btnBoldText_Click"/>
-                    <RibbonButton x:Name="btnItalicText" SmallImageSource="Resources/italic.png" HorizontalAlignment="Left" Height="28" Margin="146,-8,-164.6,-13.6" VerticalAlignment="Top" Width="25" Click="btnItalicText_Click"/>
-                    <RibbonButton x:Name="btnUnderlineText" SmallImageSource="Resources/underline.png" HorizontalAlignment="Left" Height="28" Margin="180,-14,-198.6,-7.6" VerticalAlignment="Top" Width="25" Click="btnUnderlineText_Click"/>
-                </RibbonGroup>
-
-                <!--Shape Group-->
                 <RibbonGroup Header="Shape" Height="89" Margin="0" VerticalAlignment="Top" Width="186">
                     <!--Line tool-->
                     <RibbonButton x:Name="btnLineTool" Content="" HorizontalAlignment="Left" Margin="5,11,-11.8,-8.8" VerticalAlignment="Top" Width="26" BorderBrush="{x:Null}" Height="29">
@@ -107,6 +90,23 @@
                     <ComboBox x:Name="cbShapePlugin" HorizontalAlignment="Left" Height="23" Margin="5,10,-72,-14.6" VerticalAlignment="Top" Width="95" />
                     <Button x:Name="btnLoadShapePlugin" Content="Load Shape" HorizontalAlignment="Left" Margin="76,48,-104,-31.6" VerticalAlignment="Top" Width="68" Height="22" Click="btnLoadShapePlugin_Click"/>
                 </RibbonGroup>
+
+                <!--Action-->
+
+                <!--Clipboard-->
+
+                <!--Text-->
+                <RibbonGroup Header="Text" Height="90" Margin="0,0,0,-0.4" VerticalAlignment="Top" Width="226">
+                    <RibbonButton x:Name="btnInsertText" Label="Insert Text" LargeImageSource="Resources/text.png" HorizontalAlignment="Left" Height="64" Margin="4,6,-47.6,-63.6" VerticalAlignment="Top" Width="50" Click="btnInsertText_Click"/>
+                    <ComboBox x:Name="cbFontText" HorizontalAlignment="Left" Height="23" Margin="64,1,-177,-5.6" VerticalAlignment="Top" Width="141"
+                		ItemsSource="{Binding Source={StaticResource FontCollectionSource}}" SelectionChanged="cbFontText_SelectionChanged" />
+                    <ComboBox x:Name="cbSizeText" HorizontalAlignment="Left" Height="23" Margin="63,15,-76,-16.6" VerticalAlignment="Top" Width="41" SelectionChanged="cbSizeText_SelectionChanged"/>
+                    <RibbonButton x:Name="btnBoldText" SmallImageSource="Resources/bold.png" HorizontalAlignment="Left" Height="Auto" Margin="115,-6,-133.6,-16" Width="25" Click="btnBoldText_Click"/>
+                    <RibbonButton x:Name="btnItalicText" SmallImageSource="Resources/italic.png" HorizontalAlignment="Left" Height="28" Margin="146,-8,-164.6,-13.6" VerticalAlignment="Top" Width="25" Click="btnItalicText_Click"/>
+                    <RibbonButton x:Name="btnUnderlineText" SmallImageSource="Resources/underline.png" HorizontalAlignment="Left" Height="28" Margin="180,-14,-198.6,-7.6" VerticalAlignment="Top" Width="25" Click="btnUnderlineText_Click"/>
+                </RibbonGroup>
+
+                <!--Shape Group-->
 
                 <!--Color group-->
                 <RibbonGroup Header="Color" Height="89" Margin="0" VerticalAlignment="Top" Width="325" >

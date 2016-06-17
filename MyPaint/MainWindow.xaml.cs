@@ -27,6 +27,7 @@ namespace MyPaint
         Point EndPoint;
         TShapeCreator ShapeCreator = new TShapeCreator();
         int DrawType = 0;
+        int CurrentTool = 0;
 
         bool isMouseDown = false;
         bool isShiftKeyDown = false;
@@ -205,7 +206,7 @@ namespace MyPaint
                 selectedTheLastChildrenOfCanvas();
 
                 // Shape này là SelectionTool
-                isSelectionTool = (DrawType == (int)DrawElementType.SelectionTool) ? true : false;
+                isSelectionTool = (CurrentTool == (int)DrawElementType.SelectionTool) ? true : false;
             }
 
             if (DrawType == (int)DrawElementType.Text)
@@ -233,7 +234,7 @@ namespace MyPaint
             Style controlStyle = (Style)FindResource("DesignerItemStyle");
 
             // Selection tool
-            if (DrawType == (int)DrawElementType.SelectionTool)
+            if (CurrentTool == (int)DrawElementType.SelectionTool)
             {
                 DoubleCollection dashesTemp = new DoubleCollection();
                 dashesTemp.Add(0.5);
@@ -311,7 +312,7 @@ namespace MyPaint
                 shape = ShapeCreator.createNewShape("TEllipse");
 
             DrawType = (int)DrawElementType.Shape;
-
+            CurrentTool = (int)DrawElementType.Shape;
         }
 
         private void ColorClickHandle(object sender, RoutedEventArgs e)
@@ -625,8 +626,9 @@ namespace MyPaint
 
         private void btnSelect_Click(object sender, RoutedEventArgs e)
         {
-            DrawType = (int)DrawElementType.SelectionTool;
-            shape = new TRectangle();
+            DrawType = (int)DrawElementType.Shape;
+            CurrentTool = (int)DrawElementType.SelectionTool;
+            shape = ShapeCreator.createNewShape("TRectangle");
 
             setButtonBorderAndThickness(btnSelect, (SolidColorBrush)(new BrushConverter().ConvertFrom("#CFD8DC")), 1);
             setButtonBorderAndThickness(btnRectangleTool, System.Windows.Media.Brushes.Transparent, 0);
