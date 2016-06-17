@@ -42,7 +42,11 @@ namespace MyPaint
         Brush fillBrush = System.Windows.Media.Brushes.Transparent;
         DoubleCollection dashes = new DoubleCollection();
 
-        enum DrawElementType : int { Rectangle = 1, Line = 2, Ellipse = 3, Star = 4, Heart = 5, Arrow = 6, OvalCallOut = 7, SelectionTool = 20, Text = 21, Fill = 30 }
+        enum DrawElementType : int
+        {
+            Rectangle = 1, Line = 2, Ellipse = 3, Star = 4,
+            Heart = 5, Arrow = 6, OvalCallOut = 7, SelectionTool = 20, Text = 21, Fill = 30
+        }
 
         #endregion
 
@@ -60,29 +64,44 @@ namespace MyPaint
             this.KeyUp += new KeyEventHandler(PaintCanvas_KeyUp);
 
             // Thêm các kiểu brush vào combobox
-            cbBorderStyle.Items.Add("Straight");
-            cbBorderStyle.Items.Add("Dot");
-            cbBorderStyle.Items.Add("Dash");
-            cbBorderStyle.SelectedIndex = 0;
+            PoPulateBorderStyle();
 
             // Thêm các kích thước font vào combobox
-            for (int i = 8; i < 80; i = i + 2)
-            {
-                cbSizeText.Items.Add(i);
-            }
-            cbSizeText.SelectedIndex = 2; // Size = 12
+            PopulateFontSize();
 
             // Thêm các kiểu đổ màu vào combobox
+            PopulateFillStyle();
+
+            // Thêm Adorner cho Canvas
+            AdornerLayer aLayer = AdornerLayer.GetAdornerLayer(PaintCanvas);
+            aLayer.Add(new MyPaint.Adorners.ResizingAdorner(PaintCanvas));
+        }
+
+        private void PopulateFillStyle()
+        {
             cbFillStyle.Items.Add("Solid Color");
             cbFillStyle.Items.Add("LinearGradient");
             cbFillStyle.Items.Add("RadialGradient");
             cbFillStyle.Items.Add("Black & White Checker");
             cbFillStyle.Items.Add("Fill By Image");
             cbFillStyle.SelectedIndex = 0;
+        }
 
-            // Thêm Adorner cho Canvas
-            AdornerLayer aLayer = AdornerLayer.GetAdornerLayer(PaintCanvas);
-            aLayer.Add(new MyPaint.Adorners.ResizingAdorner(PaintCanvas));
+        private void PopulateFontSize()
+        {
+            for (int i = 8; i < 80; i = i + 2)
+            {
+                cbSizeText.Items.Add(i);
+            }
+            cbSizeText.SelectedIndex = 2; // Size = 12
+        }
+
+        private void PoPulateBorderStyle()
+        {
+            cbBorderStyle.Items.Add("Straight");
+            cbBorderStyle.Items.Add("Dot");
+            cbBorderStyle.Items.Add("Dash");
+            cbBorderStyle.SelectedIndex = 0;
         }
 
         #endregion
@@ -110,30 +129,18 @@ namespace MyPaint
         private void PaintCanvas_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             isMouseDown = true;
-
             StartPoint = e.GetPosition(PaintCanvas);
 
-            #region Không cho người dùng sửa text đã chèn vào
+            // Bỏ chọn adorner cho các shape
+            unSelectedTheLastChildrenOfCanvas();
 
             if (rtbText != null)
             {
                 rtbText.BorderThickness = new Thickness(0);
                 rtbText.IsReadOnly = true;
                 rtbText.IsDocumentEnabled = false;
-                rtbText.Cursor = Cursors.Arrow;
+                rtbText.Cursor = Cursors.None;
             }
-
-            #endregion
-
-            #region Chèn văn bản khi đang vẽ shape
-
-            if (drawElementType == (int)DrawElementType.Text && isSelectShape == true)
-            {
-                unSelectedTheLastChildrenOfCanvas();
-                isSelectShape = false;
-            }
-
-            #endregion
 
             #region Đang chế độ tô loang
 
@@ -286,23 +293,13 @@ namespace MyPaint
             //shape = new TLine();
             shape = shapeCreator.createNewShape("TLine");
             drawElementType = (int)DrawElementType.Line;
-
-            setButtonBorderAndThickness(btnLineTool, (SolidColorBrush)(new BrushConverter().ConvertFrom("#CFD8DC")), 1);
-            setButtonBorderAndThickness(btnRectangleTool, System.Windows.Media.Brushes.Transparent, 0);
-            setButtonBorderAndThickness(btnEllipseTool, System.Windows.Media.Brushes.Transparent, 0);
-            setButtonBorderAndThickness(btnSelect, System.Windows.Media.Brushes.Transparent, 0);
         }
 
         // Rectangle tool
         private void btnRectangleTool_Click(object sender, RoutedEventArgs e)
         {
-            //shape = new TRectangle();
+            shape = shapeCreator.createNewShape("TRectangle");
             drawElementType = (int)DrawElementType.Rectangle;
-
-            setButtonBorderAndThickness(btnRectangleTool, (SolidColorBrush)(new BrushConverter().ConvertFrom("#CFD8DC")), 1);
-            setButtonBorderAndThickness(btnLineTool, System.Windows.Media.Brushes.Transparent, 0);
-            setButtonBorderAndThickness(btnEllipseTool, System.Windows.Media.Brushes.Transparent, 0);
-            setButtonBorderAndThickness(btnSelect, System.Windows.Media.Brushes.Transparent, 0);
         }
 
         // Ellipse tool
@@ -310,11 +307,6 @@ namespace MyPaint
         {
             shape = new TEllipse();
             drawElementType = (int)DrawElementType.Ellipse;
-
-            setButtonBorderAndThickness(btnEllipseTool, (SolidColorBrush)(new BrushConverter().ConvertFrom("#CFD8DC")), 1);
-            setButtonBorderAndThickness(btnLineTool, System.Windows.Media.Brushes.Transparent, 0);
-            setButtonBorderAndThickness(btnRectangleTool, System.Windows.Media.Brushes.Transparent, 0);
-            setButtonBorderAndThickness(btnSelect, System.Windows.Media.Brushes.Transparent, 0);
         }
 
         // Arrow tool
@@ -327,14 +319,14 @@ namespace MyPaint
         // Heart tool
         private void btnHeartTool_Click(object sender, RoutedEventArgs e)
         {
-           shape = new THeart();
+            shape = new THeart();
             drawElementType = (int)DrawElementType.Heart;
         }
 
         // OvalCallOut tool
         private void btnOvalCalloutTool_Click(object sender, RoutedEventArgs e)
         {
-           shape = new TOvalCallout();
+            shape = new TOvalCallout();
             drawElementType = (int)DrawElementType.OvalCallOut;
         }
 
@@ -1171,6 +1163,11 @@ namespace MyPaint
         }
 
         #endregion
-        
+
+        private void btnLoadShapePlugin_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
     }
 }

@@ -60,12 +60,12 @@ E:\Dropbox\STUDY\KY 6\KTPM\Final Project\Paint\1312666\MyPaint\bin\Debug\MyPaint
 E:\Dropbox\STUDY\KY 6\KTPM\Final Project\Paint\1312666\MyPaint\bin\Debug\ShapeLib.dll
 E:\Dropbox\STUDY\KY 6\KTPM\Final Project\Paint\1312666\MyPaint\bin\Debug\ShapeLib.pdb
 E:\Dropbox\STUDY\KY 6\KTPM\Final Project\Paint\My Paint\MyPaint\bin\Debug\MyPaint.exe.config
-E:\Dropbox\STUDY\KY 6\KTPM\Final Project\Paint\My Paint\MyPaint\obj\Debug\MyPaint.exe
-E:\Dropbox\STUDY\KY 6\KTPM\Final Project\Paint\My Paint\MyPaint\obj\Debug\MyPaint.pdb
 E:\Dropbox\STUDY\KY 6\KTPM\Final Project\Paint\My Paint\MyPaint\bin\Debug\MyPaint.exe
 E:\Dropbox\STUDY\KY 6\KTPM\Final Project\Paint\My Paint\MyPaint\bin\Debug\MyPaint.pdb
 E:\Dropbox\STUDY\KY 6\KTPM\Final Project\Paint\My Paint\MyPaint\bin\Debug\ShapeLib.dll
+E:\Dropbox\STUDY\KY 6\KTPM\Final Project\Paint\My Paint\MyPaint\bin\Debug\TColorLib.dll
 E:\Dropbox\STUDY\KY 6\KTPM\Final Project\Paint\My Paint\MyPaint\bin\Debug\ShapeLib.pdb
+E:\Dropbox\STUDY\KY 6\KTPM\Final Project\Paint\My Paint\MyPaint\bin\Debug\TColorLib.pdb
 E:\Dropbox\STUDY\KY 6\KTPM\Final Project\Paint\My Paint\MyPaint\obj\Debug\MyPaint.csprojResolveAssemblyReference.cache
 E:\Dropbox\STUDY\KY 6\KTPM\Final Project\Paint\My Paint\MyPaint\obj\Debug\MainWindow.baml
 E:\Dropbox\STUDY\KY 6\KTPM\Final Project\Paint\My Paint\MyPaint\obj\Debug\MainWindow.g.cs
@@ -79,5 +79,5 @@ E:\Dropbox\STUDY\KY 6\KTPM\Final Project\Paint\My Paint\MyPaint\obj\Debug\Resour
 E:\Dropbox\STUDY\KY 6\KTPM\Final Project\Paint\My Paint\MyPaint\obj\Debug\MyPaint.g.resources
 E:\Dropbox\STUDY\KY 6\KTPM\Final Project\Paint\My Paint\MyPaint\obj\Debug\MyPaint.Properties.Resources.resources
 E:\Dropbox\STUDY\KY 6\KTPM\Final Project\Paint\My Paint\MyPaint\obj\Debug\MyPaint.csproj.GenerateResource.Cache
-E:\Dropbox\STUDY\KY 6\KTPM\Final Project\Paint\My Paint\MyPaint\bin\Debug\TColorLib.dll
-E:\Dropbox\STUDY\KY 6\KTPM\Final Project\Paint\My Paint\MyPaint\bin\Debug\TColorLib.pdb
+E:\Dropbox\STUDY\KY 6\KTPM\Final Project\Paint\My Paint\MyPaint\obj\Debug\MyPaint.exe
+E:\Dropbox\STUDY\KY 6\KTPM\Final Project\Paint\My Paint\MyPaint\obj\Debug\MyPaint.pdb

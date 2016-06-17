@@ -40,28 +40,28 @@
     <Position X="2.25" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAgAAAAAAACAAAAAAAAAAAAAAEAABAAAAAAAAAiAABA=</HashCode>
-      <FileName>DesignerItemDecorator.cs</FileName>
+      <FileName>Adorners\DesignerItemDecorator.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="DiagramDesigner.MoveThumb" Collapsed="true">
     <Position X="7.5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>EAAAAAAAAAAAAIAAAAAAAAAAAAAAAEAAAEAAAAAAAAA=</HashCode>
-      <FileName>MoveThumb.cs</FileName>
+      <FileName>Adorners\MoveThumb.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="DiagramDesigner.ResizeThumb" Collapsed="true">
     <Position X="5.75" Y="1.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>EAAAAAAAAAAAAIAAAgAAAAQCAACAAAAAAAAAAADAACA=</HashCode>
-      <FileName>ResizeThumb.cs</FileName>
+      <FileName>Adorners\ResizeThumb.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="DiagramDesigner.RotateThumb" Collapsed="true">
     <Position X="2.25" Y="2.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>EAAAAAQAhAAAAIAAAAAAAAACAAAEAAAAAAAAAABAAAA=</HashCode>
-      <FileName>RotateThumb.cs</FileName>
+      <FileName>Adorners\RotateThumb.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="MyPaint.Adorners.ResizingAdorner" Collapsed="true">
@@ -81,14 +81,14 @@
   <Class Name="MyPaint.MainWindow" Collapsed="true">
     <Position X="5.75" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>hEAgFARIUwDhWNAgIZAEQGnFBAG5ACagwQ4UOEgIBQg=</HashCode>
+      <HashCode>hEAgFARIUwDhWNEgIZAAQGvFBAG5ACawwQoUOEgAAQg=</HashCode>
       <FileName>MainWindow.xaml.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="MyPaint.paintCanvasManager" Collapsed="true">
+  <Class Name="MyPaint.PaintCanvasManager" Collapsed="true">
     <Position X="0.5" Y="1.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>gEAQhARAUQggUSAAIJAERACFA4CCACYCUQYEADhIBAg=</HashCode>
+      <HashCode>gggSgAEVUAggQyAAINAAAAIAB4CAAAYCEgQAABBgBgg=</HashCode>
       <FileName>PaintCanvasManager.cs</FileName>
     </TypeIdentifier>
   </Class>

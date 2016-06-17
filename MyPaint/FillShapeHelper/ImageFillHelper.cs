@@ -26,6 +26,7 @@ namespace MyPaint
                 }
                 catch (Exception e)
                 {
+                    Console.WriteLine("Error fill shape by image: " + e.ToString());
                 }
             }
 

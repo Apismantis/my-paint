@@ -66,14 +66,14 @@
     <Compile Include="Adorners\SizeChrome.cs" />
     <Compile Include="BitmapHelper.cs" />
     <Compile Include="FillShapeHelper\CaroFillHelper.cs" />
-    <Compile Include="DesignerItemDecorator.cs" />
+    <Compile Include="Adorners\DesignerItemDecorator.cs" />
     <Compile Include="FillShapeHelper\FillShapeHelper.cs" />
     <Compile Include="FillShapeHelper\ImageFillHelper.cs" />
     <Compile Include="FillShapeHelper\LinearGradientHelper.cs" />
     <Compile Include="PaintCanvasManager.cs" />
     <Compile Include="FillShapeHelper\RadialGradientHelper.cs" />
-    <Compile Include="ResizeThumb.cs" />
-    <Compile Include="RotateThumb.cs" />
+    <Compile Include="Adorners\ResizeThumb.cs" />
+    <Compile Include="Adorners\RotateThumb.cs" />
     <Compile Include="Shape\TArrow.cs" />
     <Compile Include="Shape\THeart.cs" />
     <Compile Include="Shape\TLine.cs" />
@@ -106,7 +106,7 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MoveThumb.cs" />
+    <Compile Include="Adorners\MoveThumb.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
