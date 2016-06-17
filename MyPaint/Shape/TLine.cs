@@ -21,6 +21,7 @@ namespace ShapeLib
             line.X2 = EndPoint.X;
             line.Y2 = EndPoint.Y;
             drawNewShape(isShiftKeyPress, line, collection);
+            Console.WriteLine("Drawing TLine");
         }
 
         public override void drawInMouseMove(bool isShiftKeyPress, UIElementCollection collection)

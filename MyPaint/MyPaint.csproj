@@ -65,6 +65,7 @@
     <Compile Include="Adorners\SizeAdorner.cs" />
     <Compile Include="Adorners\SizeChrome.cs" />
     <Compile Include="BitmapHelper.cs" />
+    <Compile Include="Command.cs" />
     <Compile Include="FillShapeHelper\CaroFillHelper.cs" />
     <Compile Include="Adorners\DesignerItemDecorator.cs" />
     <Compile Include="FillShapeHelper\FillShapeHelper.cs" />
@@ -74,10 +75,11 @@
     <Compile Include="FillShapeHelper\RadialGradientHelper.cs" />
     <Compile Include="Adorners\ResizeThumb.cs" />
     <Compile Include="Adorners\RotateThumb.cs" />
+    <Compile Include="PaintUIElementManager.cs" />
+    <Compile Include="ShapeCommand.cs" />
     <Compile Include="Shape\TArrow.cs" />
-    <Compile Include="Shape\THeart.cs" />
+    <Compile Include="Shape\TStar.cs" />
     <Compile Include="Shape\TLine.cs" />
-    <Compile Include="Shape\TOvalCallOut.cs" />
     <Compile Include="FillShapeHelper\SolidFillHelper.cs" />
     <Compile Include="TShapeCreator.cs" />
     <Page Include="MainWindow.xaml">

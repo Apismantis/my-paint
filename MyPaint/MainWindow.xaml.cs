@@ -12,6 +12,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Diagnostics;
 using TColorLib;
+using System.Windows.Controls.Ribbon;
 
 namespace MyPaint
 {
@@ -35,6 +36,7 @@ namespace MyPaint
         bool isFillColorPress = false;
         bool isSelectionTool = false;
         bool isSelectShape = false;
+        RibbonButton ActiveButton;
 
         RichTextBox rtbText;
 
@@ -47,11 +49,12 @@ namespace MyPaint
         {
             Shape = 1,
             SelectionTool = 2,
-            Text = 3,
-            Fill = 4
+            Text = 3
         }
 
         #endregion
+
+        #region Load form
 
         public MainWindow()
         {
@@ -62,9 +65,6 @@ namespace MyPaint
             Dashes = new DoubleCollection();
         }
 
-
-        #region Load form
-
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             this.KeyDown += new KeyEventHandler(PaintCanvas_KeyDown);
@@ -72,6 +72,7 @@ namespace MyPaint
 
             initHandleColorClick();
             initHandleShapeToolClick();
+            initHandleClickButton();
 
             // Thêm các kiểu brush vào combobox
             PoPulateBorderStyle();
@@ -87,12 +88,32 @@ namespace MyPaint
             aLayer.Add(new MyPaint.Adorners.ResizingAdorner(PaintCanvas));
         }
 
+
+        private void initHandleClickButton()
+        {
+            btnLineTool.Click += ButtonOnClick;
+            btnRectangleTool.Click += ButtonOnClick;
+            btnEllipseTool.Click += ButtonOnClick;
+            btnArrowTool.Click += ButtonOnClick;
+            btnStar.Click += ButtonOnClick;
+
+            btnSelect.Click += ButtonOnClick;
+            btnStrokeColor.Click += ButtonOnClick;
+            btnFillColor.Click += ButtonOnClick;
+
+            btnInsertText.Click += ButtonOnClick;
+            btnBoldText.Click += ButtonOnClick;
+            btnItalicText.Click += ButtonOnClick;
+            btnUnderlineText.Click += ButtonOnClick;
+        }
+
         private void initHandleShapeToolClick()
         {
             btnLineTool.Click += ShapeToolClick;
             btnRectangleTool.Click += ShapeToolClick;
             btnEllipseTool.Click += ShapeToolClick;
             btnArrowTool.Click += ShapeToolClick;
+            btnStar.Click += ShapeToolClick;
         }
 
         private void initHandleColorClick()
@@ -155,7 +176,7 @@ namespace MyPaint
 
         #region Canvas Mouse Event
 
-        // MouseButtonDown Event
+        // Mouse Left Down Event
         private void PaintCanvas_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             isMouseDown = true;
@@ -168,7 +189,7 @@ namespace MyPaint
             MakeRichTextBoxReadOnly();
 
             // Loại bỏ contentcontrol của shape đang chọn
-            if (isSelectShape)
+            if (isSelectShape && PaintCanvas.Children.Count > 0)
             {
                 var control = PaintCanvas.Children[PaintCanvas.Children.Count - 1];
                 ContentControl cc = (ContentControl)control;
@@ -177,43 +198,17 @@ namespace MyPaint
 
             // Xóa bỏ vùng chọn của selectiontool
             if (isSelectionTool)
-                PaintCanvas.Children.RemoveAt(PaintCanvas.Children.Count - 1);
+                removeLastChildren();
 
             // Khởi tạo vẽ hình
             if (shape != null && DrawType == (int)DrawElementType.Shape)
-                initShape();
+                initShapeStyle();
 
             isSelectShape = false;
             isSelectionTool = false;
         }
 
-
-        // MouseButtonUp Event
-        private void PaintCanvas_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
-        {
-            isMouseDown = false;
-            EndPoint = e.GetPosition(PaintCanvas);
-
-            if (shape != null && StartPoint != EndPoint && DrawType == (int)DrawElementType.Shape)
-            {
-                shape.removeShape(PaintCanvas.Children);
-
-                shape.EndPoint = EndPoint;
-                shape.draw(isShiftKeyDown, PaintCanvas.Children);
-
-                // Đang chọn shape
-                isSelectShape = true;
-                selectedTheLastChildrenOfCanvas();
-
-                // Shape này là SelectionTool
-                isSelectionTool = (CurrentTool == (int)DrawElementType.SelectionTool) ? true : false;
-            }
-
-            if (DrawType == (int)DrawElementType.Text)
-                InsertNewRichTextBox();
-        }
-
-        // MouseMove envent
+        // Mouse Move Event
         private void PaintCanvas_MouseMove(object sender, MouseEventArgs e)
         {
             if (isMouseDown && shape != null)
@@ -223,8 +218,42 @@ namespace MyPaint
             }
         }
 
+        // Mouse Left Up Event
+        private void PaintCanvas_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            isMouseDown = false;
+            EndPoint = e.GetPosition(PaintCanvas);
 
-        private void initShape()
+            // Chèn hình
+            if (shape != null && StartPoint != EndPoint && DrawType == (int)DrawElementType.Shape)
+            {
+                // Xóa bỏ hình đã vé trước đó
+                shape.removeShape(PaintCanvas.Children);
+
+                // Vẽ lại hình mới
+                shape.EndPoint = EndPoint;
+                shape.draw(isShiftKeyDown, PaintCanvas.Children);
+
+                // Đang chọn shape
+                isSelectShape = true;
+                selectedTheLastChildrenOfCanvas();
+
+                // Shape này là SelectionTool
+                isSelectionTool = (CurrentTool == (int)DrawElementType.SelectionTool) ? true : false;
+
+                // Tạo một ShapeCommand cho Undo, Redo
+                if (!isSelectionTool)
+                {
+                    ShapeCommand cmd = new ShapeCommand(PaintCanvas.Children, PaintCanvas.Children[PaintCanvas.Children.Count - 1]);
+                }
+            }
+
+            // Chèn văn bản
+            if (DrawType == (int)DrawElementType.Text)
+                InsertNewRichTextBox();
+        }
+
+        private void initShapeStyle()
         {
             shape.StrokeColorBrush = StrokeBrush;
             shape.StrokeThickness = StrokeThicknessSize;
@@ -233,7 +262,7 @@ namespace MyPaint
             shape.StrokeType = new DoubleCollection(Dashes);
             Style controlStyle = (Style)FindResource("DesignerItemStyle");
 
-            // Selection tool
+            // Khởi tạo cho vùng chọn
             if (CurrentTool == (int)DrawElementType.SelectionTool)
             {
                 DoubleCollection dashesTemp = new DoubleCollection();
@@ -256,7 +285,7 @@ namespace MyPaint
                 rtbText.BorderThickness = new Thickness(0);
                 rtbText.IsReadOnly = true;
                 rtbText.IsDocumentEnabled = false;
-                rtbText.Cursor = Cursors.None;
+                rtbText.Cursor = Cursors.Arrow;
             }
         }
 
@@ -281,19 +310,56 @@ namespace MyPaint
             Canvas.SetTop(rtbText, StartPoint.Y);
 
             PaintCanvas.Children.Add(rtbText);
+            ShapeCommand cmd = new ShapeCommand(PaintCanvas.Children, PaintCanvas.Children[PaintCanvas.Children.Count - 1]);
         }
 
         #endregion
 
-        #region Set border brush and border thickness for button
-
-        public void setButtonBorderAndThickness(Button button, SolidColorBrush brushColor, double thicknessSize)
+        private void ButtonOnClick(object sender, RoutedEventArgs e)
         {
-            button.BorderBrush = brushColor;
-            button.BorderThickness = new Thickness(thicknessSize);
-        }
+            RibbonButton btn = (RibbonButton)sender;
+            if (ActiveButton != null)
+                setButtonFocus(ActiveButton, MyColorConverter.convertToSolidColor("#E0E0E0"), 0);
 
-        #endregion
+            if (btn == btnLineTool)
+                ActiveButton = btnLineTool;
+
+            else if (btn == btnArrowTool)
+                ActiveButton = btnArrowTool;
+
+            else if (btn == btnRectangleTool)
+                ActiveButton = btnRectangleTool;
+
+            else if (btn == btnEllipseTool)
+                ActiveButton = btnEllipseTool;
+
+            else if (btn == btnStar)
+                ActiveButton = btnStar;
+
+            else if (btn == btnSelect)
+                ActiveButton = btnSelect;
+
+            else if (btn == btnInsertText)
+                ActiveButton = btnInsertText;
+
+            else if (btn == btnBoldText)
+                ActiveButton = btnBoldText;
+
+            else if (btn == btnItalicText)
+                ActiveButton = btnItalicText;
+
+            else if (btn == btnUnderlineText)
+                ActiveButton = btnUnderlineText;
+
+            else if (btn == btnStrokeColor)
+                ActiveButton = btnStrokeColor;
+
+            else if (btn == btnFillColor)
+                ActiveButton = btnFillColor;
+
+            if (ActiveButton != null)
+                setButtonFocus(ActiveButton, MyColorConverter.convertToSolidColor("#000000"), 0.5);
+        }
 
         private void ShapeToolClick(object sender, RoutedEventArgs e)
         {
@@ -310,6 +376,9 @@ namespace MyPaint
 
             else if (btn == btnEllipseTool)
                 shape = ShapeCreator.createNewShape("TEllipse");
+
+            else if (btn == btnStar)
+                shape = ShapeCreator.createNewShape("TStar");
 
             DrawType = (int)DrawElementType.Shape;
             CurrentTool = (int)DrawElementType.Shape;
@@ -348,6 +417,12 @@ namespace MyPaint
 
             if (color != null)
                 updateFillStrokeColor(color);
+        }
+
+        public void setButtonFocus(RibbonButton button, SolidColorBrush brushColor, double thicknessSize)
+        {
+            button.BorderBrush = brushColor;
+            button.BorderThickness = new Thickness(thicknessSize);
         }
 
         public void updateFillStrokeColor(Brush color)
@@ -394,9 +469,6 @@ namespace MyPaint
         // StrokeColor Button Click
         private void btnStrokeColor_Click(object sender, RoutedEventArgs e)
         {
-            setButtonBorderAndThickness(btnStrokeColor, MyColorConverter.convertToSolidColor("#000000"), 2);
-            setButtonBorderAndThickness(btnFillColor, MyColorConverter.convertToSolidColor("#000000"), 0.3);
-
             isStrokeColorPress = true;
             isFillColorPress = false;
         }
@@ -404,9 +476,6 @@ namespace MyPaint
         // FillColor Button Click
         private void btnFillColor_Click(object sender, RoutedEventArgs e)
         {
-            setButtonBorderAndThickness(btnStrokeColor, MyColorConverter.convertToSolidColor("#000000"), 0.3);
-            setButtonBorderAndThickness(btnFillColor, MyColorConverter.convertToSolidColor("#000000"), 2);
-
             isStrokeColorPress = false;
             isFillColorPress = true;
         }
@@ -529,7 +598,7 @@ namespace MyPaint
         {
             PaintCanvas.Children.Clear();
             PaintCanvas.Background = System.Windows.Media.Brushes.White;
-            redoObjectList.Clear();
+            RedoObject.Clear();
         }
 
         // Open file
@@ -545,15 +614,14 @@ namespace MyPaint
                 ImageBrush image = new ImageBrush();
                 image.ImageSource = new BitmapImage(new Uri(@openFileDialog.FileName, UriKind.Relative));
 
-                // Đưa ảnh vào 1 hình chữ nhật
-                Rectangle rect = new Rectangle();
-                rect.Width = image.ImageSource.Width;
-                rect.Height = image.ImageSource.Height;
-                rect.Fill = image;
+                shape = ShapeCreator.createNewShape("TRectangle");
+                shape.FillColorBrush = image;
+                shape.StrokeColorBrush = System.Windows.Media.Brushes.Transparent;
+                shape.StartPoint = new Point(0, 0);
+                shape.EndPoint = new Point(image.ImageSource.Width, image.ImageSource.Height);
 
-                // Thêm ảnh vào Canvas
-                PaintCanvas.Children.Clear();
-                PaintCanvas.Children.Add(rect);
+                shape.draw(isShiftKeyDown, PaintCanvas.Children);
+                ShapeCommand cmd = new ShapeCommand(PaintCanvas.Children, PaintCanvas.Children[PaintCanvas.Children.Count - 1]);
             }
         }
 
@@ -605,21 +673,6 @@ namespace MyPaint
             }
         }
 
-        // Earse all children of canvas
-        private void btnClearAll_Click(object sender, RoutedEventArgs e)
-        {
-            PaintCanvas.Children.Clear();
-            PaintCanvas.Background = System.Windows.Media.Brushes.White;
-        }
-
-        private void btnDelete_Click(object sender, RoutedEventArgs e)
-        {
-            if (isSelectShape)
-            {
-                PaintCanvas.Children.RemoveAt(PaintCanvas.Children.Count - 1);
-            }
-        }
-
         #endregion
 
         #region Clipboard: Cut, Copy, Paste
@@ -629,11 +682,6 @@ namespace MyPaint
             DrawType = (int)DrawElementType.Shape;
             CurrentTool = (int)DrawElementType.SelectionTool;
             shape = ShapeCreator.createNewShape("TRectangle");
-
-            setButtonBorderAndThickness(btnSelect, (SolidColorBrush)(new BrushConverter().ConvertFrom("#CFD8DC")), 1);
-            setButtonBorderAndThickness(btnRectangleTool, System.Windows.Media.Brushes.Transparent, 0);
-            setButtonBorderAndThickness(btnLineTool, System.Windows.Media.Brushes.Transparent, 0);
-            setButtonBorderAndThickness(btnEllipseTool, System.Windows.Media.Brushes.Transparent, 0);
         }
 
         // Copy
@@ -642,17 +690,10 @@ namespace MyPaint
             if (isSelectionTool)
             {
                 // Xóa ContentControl của Select tạo ra
-                if (PaintCanvas.Children.Count >= 1)
-                {
-                    PaintCanvas.Children.RemoveAt(PaintCanvas.Children.Count - 1);
-                }
+                removeLastChildren();
 
                 // Tạo CroppedBitmap lưu vào Clipboard
-                System.Drawing.Bitmap bmp = BitmapHelper.renderCanvasToBitmap(PaintCanvas);
-                CroppedBitmap cb = BitmapHelper.createCroppedBitmapImage(bmp, StartPoint, EndPoint);
-
-                if (cb != null)
-                    Clipboard.SetImage(cb);
+                saveCroppedBitmapToClipboard();
             }
         }
 
@@ -669,30 +710,23 @@ namespace MyPaint
                 // Tạo ImageBrush để fill cho Rectangle
                 ImageBrush imb = new ImageBrush(bmi);
 
-                ContentControl cc = new ContentControl();
-                Rectangle rectangle = new Rectangle();
+                shape = ShapeCreator.createNewShape("TRectangle");
+                shape.FillColorBrush = imb;
+                shape.StrokeColorBrush = System.Windows.Media.Brushes.Transparent;
+                shape.StartPoint = new Point(0, 0);
+                shape.EndPoint = new Point(imb.ImageSource.Width, imb.ImageSource.Height);
+                Style controlStyle = (Style)FindResource("DesignerItemStyle");
+                if (controlStyle != null)
+                    shape.controlStyle = controlStyle;
 
-                rectangle.Stroke = System.Windows.Media.Brushes.Transparent;
-                rectangle.Fill = imb;
-
-                rectangle.IsHitTestVisible = false;
-                rectangle.Stretch = System.Windows.Media.Stretch.Fill;
-
-                cc.Width = bmi.Width;
-                cc.Height = bmi.Height;
-                Canvas.SetLeft(cc, 0);
-                Canvas.SetTop(cc, 0);
-
-                cc.Style = (Style)FindResource("DesignerItemStyle");
-                cc.Content = rectangle;
-
-                // Thêm ContentControl vào Canvas
-                PaintCanvas.Children.Add(cc);
+                shape.draw(isShiftKeyDown, PaintCanvas.Children);
 
                 // Show control cho ContentControl
                 selectedTheLastChildrenOfCanvas();
                 isSelectShape = true;
+                ShapeCommand cmd = new ShapeCommand(PaintCanvas.Children, PaintCanvas.Children[PaintCanvas.Children.Count - 1]);
             }
+
             // Thoát chế độ Select
             isSelectionTool = false;
         }
@@ -703,30 +737,38 @@ namespace MyPaint
             if (isSelectionTool)
             {
                 // Xóa ContentControl của Select
-                if (PaintCanvas.Children.Count >= 1)
-                {
-                    PaintCanvas.Children.RemoveAt(PaintCanvas.Children.Count - 1);
-                }
+                removeLastChildren();
 
-
-                Rectangle rect = new Rectangle();
-                rect.Width = Math.Abs(StartPoint.X - EndPoint.X);
-                rect.Height = Math.Abs(StartPoint.Y - EndPoint.Y);
-                rect.Fill = System.Windows.Media.Brushes.White;
-                Canvas.SetLeft(rect, Math.Min(StartPoint.X, EndPoint.X));
-                Canvas.SetTop(rect, Math.Min(StartPoint.Y, EndPoint.Y));
+                shape = ShapeCreator.createNewShape("TRectangle");
+                shape.StartPoint = StartPoint;
+                shape.EndPoint = EndPoint;
+                shape.FillColorBrush = System.Windows.Media.Brushes.White;
+                shape.StrokeColorBrush = System.Windows.Media.Brushes.Transparent;
+                shape.draw(isShiftKeyDown, PaintCanvas.Children);
 
                 // Lưu CroppedBitmapImage vào Clipboard
-                System.Drawing.Bitmap bmp = BitmapHelper.renderCanvasToBitmap(PaintCanvas);
-                CroppedBitmap cb = BitmapHelper.createCroppedBitmapImage(bmp, StartPoint, EndPoint);
+                saveCroppedBitmapToClipboard();
 
-                if (cb != null)
-                    Clipboard.SetImage(cb);
-
-                PaintCanvas.Children.Add(rect);
+                ShapeCommand cmd = new ShapeCommand(PaintCanvas.Children, PaintCanvas.Children[PaintCanvas.Children.Count - 1]);
             }
+
             // Thoát chế độ Select
             isSelectionTool = false;
+        }
+
+        private void saveCroppedBitmapToClipboard()
+        {
+            System.Drawing.Bitmap bmp = BitmapHelper.renderCanvasToBitmap(PaintCanvas);
+            CroppedBitmap cb = BitmapHelper.createCroppedBitmapImage(bmp, StartPoint, EndPoint);
+
+            if (cb != null)
+                Clipboard.SetImage(cb);
+        }
+
+        private void removeLastChildren()
+        {
+            if (PaintCanvas.Children.Count >= 1)
+                PaintCanvas.Children.RemoveAt(PaintCanvas.Children.Count - 1);
         }
 
         #endregion
@@ -781,65 +823,46 @@ namespace MyPaint
 
         private void btnBoldText_Click(object sender, RoutedEventArgs e)
         {
-            FontWeight fontWeight = (FontWeight)rtbText.Selection.GetPropertyValue(FontWeightProperty);
-            if (fontWeight == FontWeights.Bold)
-                changePropertyText(FontWeightProperty, FontWeights.Regular);
-            else
-                changePropertyText(FontWeightProperty, FontWeights.Bold);
+            if (rtbText != null)
+            {
+                FontWeight fontWeight = (FontWeight)rtbText.Selection.GetPropertyValue(FontWeightProperty);
+                if (fontWeight == FontWeights.Bold)
+                    changePropertyText(FontWeightProperty, FontWeights.Regular);
+                else
+                    changePropertyText(FontWeightProperty, FontWeights.Bold);
+            }
         }
 
         private void btnItalicText_Click(object sender, RoutedEventArgs e)
         {
-            FontStyle fontStyle = (FontStyle)rtbText.Selection.GetPropertyValue(FontStyleProperty);
-            if (fontStyle == FontStyles.Italic)
-                changePropertyText(FontStyleProperty, FontStyles.Normal);
-            else
-                changePropertyText(FontStyleProperty, FontStyles.Italic);
+            if (rtbText != null)
+            {
+                FontStyle fontStyle = (FontStyle)rtbText.Selection.GetPropertyValue(FontStyleProperty);
+                if (fontStyle == FontStyles.Italic)
+                    changePropertyText(FontStyleProperty, FontStyles.Normal);
+                else
+                    changePropertyText(FontStyleProperty, FontStyles.Italic);
+            }
         }
 
         private void btnUnderlineText_Click(object sender, RoutedEventArgs e)
         {
-            TextDecorationCollection textDecoration = (TextDecorationCollection)rtbText.Selection.GetPropertyValue(Inline.TextDecorationsProperty);
-            if (textDecoration.Count == 0)
-                changePropertyText(Inline.TextDecorationsProperty, TextDecorations.Underline);
-            else
-                changePropertyText(Inline.TextDecorationsProperty, null);
-        }
-
-        #endregion
-
-        #endregion
-
-        #region Undo, Redo
-
-        Stack<Object> redoObjectList = new Stack<Object>();
-
-        // Undo: Xóa các đối tượng con của canvas và thêm vào danh sách các đối tượng redo
-        // Redo: Lấy các đối tượng trong danh sách redo thêm vào canvas
-        private void btnRedo_Click(object sender, RoutedEventArgs e)
-        {
-            if (redoObjectList.Count > 0)
+            if (rtbText != null)
             {
-                UIElement uie = (UIElement)redoObjectList.Pop();
-                PaintCanvas.Children.Add(uie);
+                TextDecorationCollection textDecoration = (TextDecorationCollection)rtbText.Selection.GetPropertyValue(Inline.TextDecorationsProperty);
+                if (textDecoration.Count == 0)
+                    changePropertyText(Inline.TextDecorationsProperty, TextDecorations.Underline);
+                else
+                    changePropertyText(Inline.TextDecorationsProperty, null);
             }
         }
 
-        private void btnUndo_Click(object sender, RoutedEventArgs e)
-        {
-            if (PaintCanvas.Children.Count > 0)
-            {
-                UIElement uie = PaintCanvas.Children[PaintCanvas.Children.Count - 1];
-                redoObjectList.Push(uie);
-                PaintCanvas.Children.RemoveAt(PaintCanvas.Children.Count - 1);
-            }
-        }
+        #endregion
 
         #endregion
 
         private void btnLoadShapePlugin_Click(object sender, RoutedEventArgs e)
         {
-
         }
 
         private void btnFill_Click(object sender, RoutedEventArgs e)
@@ -847,5 +870,64 @@ namespace MyPaint
 
         }
 
+
+        #region Undo, Redo
+
+        // Earse all children of canvas
+        private void btnClearAll_Click(object sender, RoutedEventArgs e)
+        {
+            PaintCanvas.Children.Clear();
+            PaintCanvas.Background = System.Windows.Media.Brushes.White;
+            RedoObject.Clear();
+            isSelectionTool = false;
+            isSelectShape = false;
+        }
+
+        private void btnDelete_Click(object sender, RoutedEventArgs e)
+        {
+            if (isSelectShape)
+            {
+                PaintCanvas.Children.RemoveAt(PaintCanvas.Children.Count - 1);
+                RedoObject.RemoveAt(CurrentUIEIdx);
+                CurrentUIEIdx--;
+            }
+        }
+
+        private static List<Command> RedoObject = new List<Command>();
+        private static int CurrentUIEIdx = 0;
+
+        public static void registerMe(Command command)
+        {
+            //if (CurrentUIEIdx < RedoObject.Count - 1)
+            //    RedoObject.RemoveRange(CurrentUIEIdx, RedoObject.Count - CurrentUIEIdx);
+
+            RedoObject.Add(command);
+            CurrentUIEIdx = RedoObject.Count - 1;
+        }
+
+        // Undo: Xóa các đối tượng con của canvas và thêm vào danh sách các đối tượng redo
+        // Redo: Lấy các đối tượng trong danh sách redo thêm vào canvas
+        private void btnRedo_Click(object sender, RoutedEventArgs e)
+        {
+            CurrentUIEIdx++;
+            if (CurrentUIEIdx >= 0 && CurrentUIEIdx < RedoObject.Count)
+                RedoObject[CurrentUIEIdx].redo();
+            else
+                CurrentUIEIdx = RedoObject.Count - 1; // Reset
+        }
+
+        private void btnUndo_Click(object sender, RoutedEventArgs e)
+        {
+            if (CurrentUIEIdx >= 0 && CurrentUIEIdx < RedoObject.Count)
+            {
+                RedoObject[CurrentUIEIdx].undo();
+                CurrentUIEIdx--;
+            }
+
+            if (CurrentUIEIdx < 0)
+                CurrentUIEIdx = -1;
+        }
+
+        #endregion
     }
 }

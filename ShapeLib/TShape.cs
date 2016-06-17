@@ -101,12 +101,12 @@ namespace ShapeLib
         // Cap hinh dang ve
         public virtual void updateShape(bool isShiftKeyPress, Shape shape, UIElementCollection collection)
         {
-            bool addSape = false;
+            bool addShape = false;
             // Create ContentControl
             if (lastCC == null)
             {
                 lastCC = new ContentControl();
-                addSape = true;
+                addShape = true;
             }
 
             shape.Stroke = StrokeColorBrush;
@@ -133,7 +133,7 @@ namespace ShapeLib
             lastCC.Style = controlStyle;
             lastCC.Content = shape;
 
-            if (addSape)
+            if (addShape)
                 collection.Add(lastCC);
         }
 
@@ -154,6 +154,14 @@ namespace ShapeLib
                 collection.Remove((Shape)lastCC.Content);
                 collection.Remove(lastCC);
                 lastCC = null;
+            }
+        }
+
+        public void addShape(UIElementCollection collection)
+        {
+            if (lastCC != null)
+            {
+                collection.Add((Shape)lastCC.Content);
             }
         }
     }

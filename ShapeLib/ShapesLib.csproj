@@ -48,7 +48,6 @@
     <Compile Include="TEllipse.cs" />
     <Compile Include="TRectangle.cs" />
     <Compile Include="TShape.cs" />
-    <Compile Include="TTriangle.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TColorLib\TColorLib.csproj">

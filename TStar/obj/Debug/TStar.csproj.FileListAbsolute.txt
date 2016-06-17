@@ -1,10 +1,1 @@
 E:\Dropbox\STUDY\KY 6\KTPM\Final Project\Paint\1312666\TStar\obj\Debug\TStar.csprojResolveAssemblyReference.cache
-E:\Dropbox\STUDY\KY 6\KTPM\Final Project\Paint\My Paint\TStar\bin\Debug\TStar.dll
-E:\Dropbox\STUDY\KY 6\KTPM\Final Project\Paint\My Paint\TStar\bin\Debug\TStar.pdb
-E:\Dropbox\STUDY\KY 6\KTPM\Final Project\Paint\My Paint\TStar\bin\Debug\ShapeLib.dll
-E:\Dropbox\STUDY\KY 6\KTPM\Final Project\Paint\My Paint\TStar\bin\Debug\TColorLib.dll
-E:\Dropbox\STUDY\KY 6\KTPM\Final Project\Paint\My Paint\TStar\bin\Debug\ShapeLib.pdb
-E:\Dropbox\STUDY\KY 6\KTPM\Final Project\Paint\My Paint\TStar\bin\Debug\TColorLib.pdb
-E:\Dropbox\STUDY\KY 6\KTPM\Final Project\Paint\My Paint\TStar\obj\Debug\TStar.csprojResolveAssemblyReference.cache
-E:\Dropbox\STUDY\KY 6\KTPM\Final Project\Paint\My Paint\TStar\obj\Debug\TStar.dll
-E:\Dropbox\STUDY\KY 6\KTPM\Final Project\Paint\My Paint\TStar\obj\Debug\TStar.pdb

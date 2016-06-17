@@ -20,13 +20,15 @@ namespace MyPaint
         {
             TRectangle rect = new TRectangle();
             TEllipse ellipse = new TEllipse();
-            TTriangle triangle = new TTriangle();
+            TStar star = new TStar();
+            TLine line = new TLine();
             TArrow arrow = new TArrow();
 
             shapes.Add(rect.getShapeName(), rect);
             shapes.Add(ellipse.getShapeName(), ellipse);
-            shapes.Add(triangle.getShapeName(), triangle);
+            shapes.Add(star.getShapeName(), star);
             shapes.Add(arrow.getShapeName(), arrow);
+            shapes.Add(line.getShapeName(), line);
         }
 
         public bool PopulateFromPlugin()

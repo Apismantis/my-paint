@@ -81,36 +81,15 @@
   <Class Name="MyPaint.MainWindow" Collapsed="true">
     <Position X="5.75" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>hEAgFARIUwDhWNEgIZAAQGvFBAG5ACawwQoUOEgAAQg=</HashCode>
+      <HashCode>hEg4EARJGQDhUEEgIBAAQErFBCCpBeawQQJwOGgAByo=</HashCode>
       <FileName>MainWindow.xaml.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="MyPaint.PaintCanvasManager" Collapsed="true">
-    <Position X="0.5" Y="1.5" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>gggSgAEVUAggQyAAINAAAAIAB4CAAAYCEgQAABBgBgg=</HashCode>
-      <FileName>PaintCanvasManager.cs</FileName>
-    </TypeIdentifier>
-  </Class>
   <Class Name="MyPaint.TArrow" Collapsed="true">
-    <Position X="0.5" Y="3.5" Width="1.5" />
+    <Position X="3.5" Y="5.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAACAAAAEAAAAAAAAAIAAAAAAAAAAAAAAQAAEAAAAAA=</HashCode>
       <FileName>Shape\TArrow.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="MyPaint.THeart" Collapsed="true">
-    <Position X="2.25" Y="3.5" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAACAAAAEAAAAAAAAAIAAAAAAAAAAAAAAQAAEAAAAAA=</HashCode>
-      <FileName>Shape\THeart.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="MyPaint.TOvalCallout" Collapsed="true">
-    <Position X="5.75" Y="3.5" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAACAAAAEAABAAAAAAIAAAAAAAAAAAAAAQAAEAAAAAA=</HashCode>
-      <FileName>Shape\TOvalCallOut.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="MyPaint.TShapeCreator" Collapsed="true">
@@ -132,11 +111,12 @@
       <HashCode>AAAAAAAAAAAAAAAAAAAAIAAAAAABAAAAAAAAAAAAAAA=</HashCode>
     </TypeIdentifier>
   </Class>
-  <Class Name="ShapeLib.TLine" Collapsed="true">
-    <Position X="4" Y="3.5" Width="1.5" />
+  <Class Name="ShapeLib.TStar" Collapsed="true">
+    <Position X="5.5" Y="5.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAACAAAAEAAAAAAAAAIAAAAAAAAAAAAAAQAAEAAAAAA=</HashCode>
-      <FileName>Shape\TLine.cs</FileName>
+      <HashCode>AAAGAAAAEAAAAAAAAAIAAAAAAAAAAAAAAQAAEAAAAAA=</HashCode>
+      <FileName>Shape\TStar.cs</FileName>
+      <NewMemberFileName>Shape\TLine.cs</NewMemberFileName>
     </TypeIdentifier>
   </Class>
   <Class Name="MyPaint.FillShapeHelper">
@@ -182,10 +162,31 @@
     </TypeIdentifier>
   </Class>
   <Class Name="MyPaint.BitmapHelper">
-    <Position X="7.25" Y="5.5" Width="1.5" />
+    <Position X="9.5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAIQAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>BitmapHelper.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MyPaint.ShapeCommand">
+    <Position X="17.25" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAEAABAAAAAAAEAEAAAAAAAAAAAAAAAAAAAAgA=</HashCode>
+      <FileName>ShapeCommand.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MyPaint.Command" Collapsed="true">
+    <Position X="16.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAEAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Command.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MyPaint.PaintUIElementManager">
+    <Position X="15" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAEAAEAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>PaintUIElementManager.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Font Name="Segoe UI" Size="9" />
