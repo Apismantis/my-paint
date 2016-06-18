@@ -163,9 +163,6 @@
     <Resource Include="Resources\line_strokethickness4.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\brushes.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Resources\Selection.png" />
   </ItemGroup>
   <ItemGroup>
@@ -192,26 +189,10 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\arrow.png" />
-    <Resource Include="Resources\heart.png" />
     <Resource Include="Resources\star.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\ovalcallout.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Resources\fill.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\new.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\new32.png" />
-    <Resource Include="Resources\open32.png" />
-    <Resource Include="Resources\save32.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\exit32.png" />
-    <Resource Include="Resources\saveas32.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\delete.png" />
@@ -221,6 +202,10 @@
       <Project>{dc954ded-8a04-41ff-be3e-b26f8fd611f7}</Project>
       <Name>ShapeLib</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\exit.png" />
+    <Resource Include="Resources\new.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -346,7 +346,7 @@ namespace MyPaint
                 ActiveButton = btnFillColor;
 
             if (ActiveButton != null)
-                SetButtonFocus(ActiveButton, MyColorConverter.convertToSolidColor("#000000"), 0.5);
+                SetButtonFocus(ActiveButton, MyColorConverter.convertToSolidColor("#90CAF9"), 0.5);
         }
 
         private void ShapeToolClick(object sender, RoutedEventArgs e)
