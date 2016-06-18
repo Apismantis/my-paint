@@ -21,22 +21,22 @@
         </ResourceDictionary>
     </Window.Resources>
 
-    <Grid Background="Transparent" Margin="0,0,0,0">
+    <Grid Background="#FFE5E5E5" Margin="0,0,0,0">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="470*"/>
             <ColumnDefinition Width="881*"/>
         </Grid.ColumnDefinitions>
         <!--Paint canvas-->
-        <ScrollViewer Margin="2,120,1.2,1.2" HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Visible" Grid.ColumnSpan="2">
+        <ScrollViewer Margin="2,133,1.2,1.2" HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Visible" Grid.ColumnSpan="2">
             <Canvas x:Name="PaintCanvas" Background="White" MouseLeftButtonDown="PaintCanvas_MouseLeftButtonDown" MouseLeftButtonUp="PaintCanvas_MouseLeftButtonUp" 
                     MouseMove="PaintCanvas_MouseMove" KeyDown="PaintCanvas_KeyDown" KeyUp="PaintCanvas_KeyUp" ClipToBounds="True" Height="600" Width="1184" 
                     HorizontalAlignment="Left" VerticalAlignment="Top"/>
         </ScrollViewer>
 
         <!--Ribbon-->
-        <Ribbon Margin="-1,-26,1.2,317.4" Grid.ColumnSpan="2">
+        <Ribbon Margin="-1,-26,1.2,439.2" Grid.ColumnSpan="2" Background="#FFFAFAFA">
             <Ribbon.ApplicationMenu>
-                <RibbonApplicationMenu>
+                <RibbonApplicationMenu Label="File" Background="#FF3278E9" BorderBrush="{x:Null}">
                     <RibbonApplicationMenuItem Header="New" ImageSource="Resources/new32.png" Click="btnNew_Click"/>
                     <RibbonApplicationMenuItem Header="Open" ImageSource="Resources/open32.png" Click="btnOpenImage_Click"/>
                     <RibbonApplicationMenuItem Header="Save" ImageSource="Resources/save32.png" Click="btnSaveImage_Click"/>
@@ -44,7 +44,7 @@
                 </RibbonApplicationMenu>
             </Ribbon.ApplicationMenu>
 
-            <RibbonTab Header="Home" Height="90" VerticalAlignment="Top" Margin="0,0,-23.2,-1.2">
+            <RibbonTab Header="Home" Height="95" VerticalAlignment="Top" Margin="0,0,-23.2,-6.2">
 
                 <!--File-->
                 <RibbonGroup Header="File" Height="89" Margin="0" VerticalAlignment="Top" Width="106">
@@ -57,13 +57,13 @@
                     <RibbonButton x:Name="btnClearAll" Label="Clear All" SmallImageSource="Resources/clearall.png" HorizontalAlignment="Left" Height="22" Margin="51,37,-113.6,-52.6" VerticalAlignment="Top" Width="69" Click="btnClearAll_Click"/>
                     <RibbonButton x:Name="btnDelete" Label="Delete" SmallImageSource="Resources/delete.png" HorizontalAlignment="Left" Height="22" Margin="51,9,-113.6,-24.6" VerticalAlignment="Top" Width="69" Click="btnDelete_Click"/>
                 </RibbonGroup>
-                <RibbonGroup Header="Clipboard" Margin="0,1,0,0.6" Width="129">
+                <RibbonGroup Header="Clipboard" Margin="0,1,0,4.2" Width="129">
                     <RibbonButton x:Name="btnSelect" Label="Select" LargeImageSource="Resources/Selection.png" Margin="0,0,-8.6,-72" HorizontalAlignment="Left" Width="39" Click="btnSelect_Click"/>
                     <RibbonButton x:Name="btnCopy" Label="Copy" SmallImageSource="Resources/copy.png" HorizontalAlignment="Left" Height="22" Margin="56,2,-104.6,-17.6" VerticalAlignment="Top" Width="55" Click="btnCopy_Click"/>
                     <RibbonButton x:Name="btnPaste" Label="Paste" SmallImageSource="Resources/paste.png" HorizontalAlignment="Left" Height="21" Margin="55,42,-101.6,-56.6" VerticalAlignment="Top" Width="53" Click="btnPaste_Click"/>
                     <RibbonButton x:Name="btnCut" Label="Cut" SmallImageSource="Resources/cut.png" HorizontalAlignment="Left" Height="22" Margin="56,13,-104.6,-28.6" VerticalAlignment="Top" Width="55" Click="btnCut_Click"/>
                 </RibbonGroup>
-                <RibbonGroup Header="Shape" Height="89" Margin="0" VerticalAlignment="Top" Width="186">
+                <RibbonGroup Header="Shape" Height="91" Margin="0" VerticalAlignment="Top" Width="186">
                     <!--Line tool-->
                     <RibbonButton FocusManager.IsFocusScope="True" x:Name="btnLineTool" Content="" HorizontalAlignment="Left" Margin="2,13,-9.8,-5.8" VerticalAlignment="Top" Width="27" BorderBrush="{x:Null}" Height="24" RenderTransformOrigin="0.5,0.5">
                         <RibbonButton.RenderTransform>
@@ -95,8 +95,8 @@
                             <ImageBrush ImageSource="Resources/arrow.png"/>
                         </RibbonButton.Background>
                     </RibbonButton>
-                    <ComboBox x:Name="cbShapePlugin" HorizontalAlignment="Left" Height="23" Margin="5,10,-61,-14.6" VerticalAlignment="Top" Width="84" FontSize="10" />
-                    <Button x:Name="btnLoadShapePlugin" Content="Load Shape" HorizontalAlignment="Left" Margin="65,46,-104,-29.6" VerticalAlignment="Top" Width="79" Height="22" Click="btnLoadShapePlugin_Click" BorderThickness="0.5" BorderBrush="#FFB7B6B6" Foreground="#FF4C4747" FontSize="10"/>
+                    <ComboBox x:Name="cbShapePlugin" HorizontalAlignment="Left" Height="23" Margin="5,10,-61,-14.6" VerticalAlignment="Top" Width="84" SelectionChanged="cbShapePlugin_SelectionChanged" BorderBrush="#FFE0E0E0" />
+                    <Button x:Name="btnLoadShapePlugin" Content="Load Shape" HorizontalAlignment="Left" Margin="69,46,-102,-31.4" VerticalAlignment="Top" Width="73" Height="23" Click="btnLoadShapePlugin_Click" BorderThickness="0.5" BorderBrush="#FFC8BFBF" Foreground="#FF4C4747" Background="#FFE5E5E5"/>
                     <RibbonButton x:Name="btnStar" HorizontalAlignment="Left" Height="23" Margin="120,-27,-136.6,0" VerticalAlignment="Top" Width="23">
                         <RibbonButton.Background>
                             <ImageBrush ImageSource="Resources/star.png"/>
@@ -109,7 +109,7 @@
                 <!--Clipboard-->
 
                 <!--Text-->
-                <RibbonGroup Header="Text" Height="90" Margin="0,0,0,-0.4" VerticalAlignment="Top" Width="226">
+                <RibbonGroup Header="Text" Height="91" Margin="0" VerticalAlignment="Top" Width="226">
                     <RibbonButton x:Name="btnInsertText" Label="Insert Text" LargeImageSource="Resources/text.png" HorizontalAlignment="Left" Height="64" Margin="4,6,-47.6,-63.6" VerticalAlignment="Top" Width="50" Click="btnInsertText_Click"/>
                     <ComboBox x:Name="cbFontText" HorizontalAlignment="Left" Height="23" Margin="64,1,-177,-5.6" VerticalAlignment="Top" Width="141"
                 		ItemsSource="{Binding Source={StaticResource FontCollectionSource}}" SelectionChanged="cbFontText_SelectionChanged" />
@@ -122,7 +122,7 @@
                 <!--Shape Group-->
 
                 <!--Color group-->
-                <RibbonGroup Header="Color" Height="89" Margin="0" VerticalAlignment="Top" Width="333" >
+                <RibbonGroup Header="Color" Height="91" Margin="0" VerticalAlignment="Top" Width="333" >
                     <!--Button StrokeColor-->
                     <RibbonButton x:Name="btnStrokeColor" HorizontalAlignment="Left" Margin="3,5,-41,-41" Width="38" RenderTransformOrigin="0.513,0.486" Background="#FF22B14C" BorderBrush="#FFE5E5E5" Height="36" VerticalAlignment="Top" MouseOverBackground="#FFE5E5E5" MouseOverBorderBrush="#FFE5E5E5" Click="btnStrokeColor_Click"/>
                     <Label Content="Stroke&#xA;Color" Height="23" Margin="2,44,-1.8,-41.4" VerticalAlignment="Top" HorizontalAlignment="Left" Width="43" FontSize="8" HorizontalContentAlignment="Center" Padding="1">
@@ -171,7 +171,7 @@
                 </RibbonGroup>
 
                 <!--Brushes Group-->
-                <RibbonGroup Header="Brushes" Height="89" Margin="0" VerticalAlignment="Top" Width="169">
+                <RibbonGroup Header="Brushes" Height="91" Margin="0" VerticalAlignment="Top" Width="169">
                     <!--Size-->
                     <RibbonMenuButton x:Name="ribbonMenuSize" Label="Size" LargeImageSource="Resources/line_stroke.png" HorizontalAlignment="Left" Margin="-4,4,-43,-56.4" Width="47" Height="66" VerticalAlignment="Top">
                         <RibbonMenuButton.Foreground>

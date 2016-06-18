@@ -13,6 +13,7 @@ using System.Windows.Shapes;
 using System.Diagnostics;
 using TColorLib;
 using System.Windows.Controls.Ribbon;
+using Microsoft.Win32;
 
 namespace MyPaint
 {
@@ -863,6 +864,26 @@ namespace MyPaint
 
         private void btnLoadShapePlugin_Click(object sender, RoutedEventArgs e)
         {
+            Microsoft.Win32.OpenFileDialog openFileDialog = new Microsoft.Win32.OpenFileDialog();
+            openFileDialog.Filter = "Dll Plugin File|*.dll";
+
+            if((bool)openFileDialog.ShowDialog())
+            {
+                TShape plugin = ShapeCreator.LoadShapePlugin(openFileDialog.FileName);
+                if (plugin != null)
+                {
+                    cbShapePlugin.Items.Add(plugin.getShapeName());
+                    cbShapePlugin.SelectedIndex = 0;
+                }
+            }  
+        }
+
+        private void cbShapePlugin_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            string shapeName = cbShapePlugin.SelectedItem.ToString();
+            shape = ShapeCreator.createNewShape(shapeName);
+            DrawType = (int)DrawElementType.Shape;
+            CurrentTool = (int)DrawElementType.Shape;
         }
 
         private void btnFill_Click(object sender, RoutedEventArgs e)
@@ -929,5 +950,6 @@ namespace MyPaint
         }
 
         #endregion
+
     }
 }

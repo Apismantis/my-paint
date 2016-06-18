@@ -71,7 +71,6 @@
     <Compile Include="FillShapeHelper\FillShapeHelper.cs" />
     <Compile Include="FillShapeHelper\ImageFillHelper.cs" />
     <Compile Include="FillShapeHelper\LinearGradientHelper.cs" />
-    <Compile Include="PaintCanvasManager.cs" />
     <Compile Include="FillShapeHelper\RadialGradientHelper.cs" />
     <Compile Include="Adorners\ResizeThumb.cs" />
     <Compile Include="Adorners\RotateThumb.cs" />
