@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{47B1D57F-1353-416A-94C3-251219BDB036}</ProjectGuid>
+    <ProjectGuid>{DC954DED-8A04-41FF-BE3E-B26F8FD611F7}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>ShapeLib</RootNamespace>
@@ -48,12 +48,6 @@
     <Compile Include="TEllipse.cs" />
     <Compile Include="TRectangle.cs" />
     <Compile Include="TShape.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\TColorLib\TColorLib.csproj">
-      <Project>{dcec0bf5-ca56-4aad-8a82-cf1e04090fc2}</Project>
-      <Name>TColorLib</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

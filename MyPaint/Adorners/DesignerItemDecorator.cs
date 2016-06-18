@@ -57,6 +57,7 @@ namespace DiagramDesigner
                     {
                         this.adorner.Visibility = Visibility.Hidden;
                     }
+
                 }
             }
             else

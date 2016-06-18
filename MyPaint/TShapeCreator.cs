@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace MyPaint
 {
-    class TShapeCreator
+    class TShapeCreator : PaintElementCreator
     {
         Dictionary<string, TShape> shapes = new Dictionary<string, TShape>();
 
@@ -37,7 +37,7 @@ namespace MyPaint
             return true;
         }
 
-        public TShape createNewShape(string shapeName)
+        public TShape CreateNewShape(string shapeName)
         {
             if (IsInShapes(shapeName))
                 return shapes[shapeName].clone();
@@ -88,6 +88,11 @@ namespace MyPaint
             {
                 return null;
             }
+        }
+
+        public TText CreateNewTextElement()
+        {
+            return null;
         }
     }
 }

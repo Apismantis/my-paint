@@ -5,13 +5,11 @@ VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyPaint", "MyPaint\MyPaint.csproj", "{395F14A1-CC48-4F9B-BF32-ECCAF010DB1F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShapesLib", "ShapeLib\ShapesLib.csproj", "{47B1D57F-1353-416A-94C3-251219BDB036}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TColorLib", "TColorLib\TColorLib.csproj", "{DCEC0BF5-CA56-4AAD-8A82-CF1E04090FC2}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "THeartPlugin", "THeartPlugin\THeartPlugin.csproj", "{AC6198B6-2698-4C4F-AB48-842709F6DDDA}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TOvalCalloutPlugin", "TOvalCalloutPlugin\TOvalCalloutPlugin.csproj", "{8FDC0353-0BE5-4BBC-98FA-631A24C3FF2D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShapeLib", "ShapeLib\ShapeLib.csproj", "{DC954DED-8A04-41FF-BE3E-B26F8FD611F7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,14 +21,6 @@ Global
 		{395F14A1-CC48-4F9B-BF32-ECCAF010DB1F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{395F14A1-CC48-4F9B-BF32-ECCAF010DB1F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{395F14A1-CC48-4F9B-BF32-ECCAF010DB1F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{47B1D57F-1353-416A-94C3-251219BDB036}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{47B1D57F-1353-416A-94C3-251219BDB036}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{47B1D57F-1353-416A-94C3-251219BDB036}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{47B1D57F-1353-416A-94C3-251219BDB036}.Release|Any CPU.Build.0 = Release|Any CPU
-		{DCEC0BF5-CA56-4AAD-8A82-CF1E04090FC2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{DCEC0BF5-CA56-4AAD-8A82-CF1E04090FC2}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{DCEC0BF5-CA56-4AAD-8A82-CF1E04090FC2}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{DCEC0BF5-CA56-4AAD-8A82-CF1E04090FC2}.Release|Any CPU.Build.0 = Release|Any CPU
 		{AC6198B6-2698-4C4F-AB48-842709F6DDDA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{AC6198B6-2698-4C4F-AB48-842709F6DDDA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AC6198B6-2698-4C4F-AB48-842709F6DDDA}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -39,6 +29,10 @@ Global
 		{8FDC0353-0BE5-4BBC-98FA-631A24C3FF2D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8FDC0353-0BE5-4BBC-98FA-631A24C3FF2D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8FDC0353-0BE5-4BBC-98FA-631A24C3FF2D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DC954DED-8A04-41FF-BE3E-B26F8FD611F7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DC954DED-8A04-41FF-BE3E-B26F8FD611F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DC954DED-8A04-41FF-BE3E-B26F8FD611F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DC954DED-8A04-41FF-BE3E-B26F8FD611F7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

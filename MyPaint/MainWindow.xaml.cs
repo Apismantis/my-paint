@@ -11,7 +11,6 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Diagnostics;
-using TColorLib;
 using System.Windows.Controls.Ribbon;
 using Microsoft.Win32;
 
@@ -25,9 +24,11 @@ namespace MyPaint
         #region Thuộc tính
 
         TShape shape;
+        TText TTextBox;
         Point StartPoint;
         Point EndPoint;
-        TShapeCreator ShapeCreator = new TShapeCreator();
+        PaintElementCreator ShapeCreator = new TShapeCreator();
+        PaintElementCreator TextCreator = new TextCreator();
         int DrawType = 0;
         int CurrentTool = 0;
 
@@ -38,8 +39,6 @@ namespace MyPaint
         bool isSelectionTool = false;
         bool isSelectShape = false;
         RibbonButton ActiveButton;
-
-        RichTextBox rtbText;
 
         double StrokeThicknessSize;
         Brush StrokeBrush;
@@ -184,10 +183,10 @@ namespace MyPaint
             StartPoint = e.GetPosition(PaintCanvas);
 
             // Bỏ chọn adorner cho các shape
-            unSelectedTheLastChildrenOfCanvas();
+            UnSelectedTheLastChildrenOfCanvas();
 
-            // Không cho sửa text
-            MakeRichTextBoxReadOnly();
+            // Ngăn không cho sửa Text
+            MakeTextReadOnly();
 
             // Loại bỏ contentcontrol của shape đang chọn
             if (isSelectShape && PaintCanvas.Children.Count > 0)
@@ -203,7 +202,7 @@ namespace MyPaint
 
             // Khởi tạo vẽ hình
             if (shape != null && DrawType == (int)DrawElementType.Shape)
-                initShapeStyle();
+                InitShapeStyle();
 
             isSelectShape = false;
             isSelectionTool = false;
@@ -237,7 +236,7 @@ namespace MyPaint
 
                 // Đang chọn shape
                 isSelectShape = true;
-                selectedTheLastChildrenOfCanvas();
+                SelectedTheLastChildrenOfCanvas();
 
                 // Shape này là SelectionTool
                 isSelectionTool = (CurrentTool == (int)DrawElementType.SelectionTool) ? true : false;
@@ -251,10 +250,10 @@ namespace MyPaint
 
             // Chèn văn bản
             if (DrawType == (int)DrawElementType.Text)
-                InsertNewRichTextBox();
+                InsertNewTextBox();
         }
 
-        private void initShapeStyle()
+        private void InitShapeStyle()
         {
             shape.StrokeColorBrush = StrokeBrush;
             shape.StrokeThickness = StrokeThicknessSize;
@@ -279,48 +278,36 @@ namespace MyPaint
                 shape.controlStyle = controlStyle;
         }
 
-        private void MakeRichTextBoxReadOnly()
+        private void MakeTextReadOnly()
         {
-            if (rtbText != null)
-            {
-                rtbText.BorderThickness = new Thickness(0);
-                rtbText.IsReadOnly = true;
-                rtbText.IsDocumentEnabled = false;
-                rtbText.Cursor = Cursors.Arrow;
-            }
+            if (TTextBox != null)
+                TTextBox.MakeTextReadOnly();
         }
 
-        private void InsertNewRichTextBox()
+        private void InsertNewTextBox()
         {
-            int fontSize = int.Parse(cbSizeText.Text);
-            string fontFamilies = cbFontText.Text;
+            TTextBox = TextCreator.CreateNewTextElement();
+            TTextBox.StartPoint = EndPoint;
+            Style controlStyle = (Style)FindResource("DesignerItemStyle");
 
-            rtbText = new RichTextBox()
-            {
-                MinHeight = 12,
-                MinWidth = 200,
-                AcceptsReturn = true,
-                IsUndoEnabled = true,
-                FontSize = fontSize,
-                FontFamily = new FontFamily(fontFamilies),
-                BorderThickness = new Thickness(0.5),
-                Background = System.Windows.Media.Brushes.Transparent,
-            };
+            if (controlStyle != null)
+                TTextBox.controlStyle = controlStyle;
 
-            Canvas.SetLeft(rtbText, StartPoint.X);
-            Canvas.SetTop(rtbText, StartPoint.Y);
+            TTextBox.insertNewText(PaintCanvas.Children);
+            SelectedTheLastChildrenOfCanvas();
 
-            PaintCanvas.Children.Add(rtbText);
             ShapeCommand cmd = new ShapeCommand(PaintCanvas.Children, PaintCanvas.Children[PaintCanvas.Children.Count - 1]);
         }
 
         #endregion
 
+        #region Handle click event
+
         private void ButtonOnClick(object sender, RoutedEventArgs e)
         {
             RibbonButton btn = (RibbonButton)sender;
             if (ActiveButton != null)
-                setButtonFocus(ActiveButton, MyColorConverter.convertToSolidColor("#E0E0E0"), 0);
+                SetButtonFocus(ActiveButton, MyColorConverter.convertToSolidColor("#E0E0E0"), 0);
 
             if (btn == btnLineTool)
                 ActiveButton = btnLineTool;
@@ -359,7 +346,7 @@ namespace MyPaint
                 ActiveButton = btnFillColor;
 
             if (ActiveButton != null)
-                setButtonFocus(ActiveButton, MyColorConverter.convertToSolidColor("#000000"), 0.5);
+                SetButtonFocus(ActiveButton, MyColorConverter.convertToSolidColor("#000000"), 0.5);
         }
 
         private void ShapeToolClick(object sender, RoutedEventArgs e)
@@ -367,19 +354,19 @@ namespace MyPaint
             Button btn = (Button)sender;
 
             if (btn == btnLineTool)
-                shape = ShapeCreator.createNewShape("TLine");
+                shape = ShapeCreator.CreateNewShape("TLine");
 
             else if (btn == btnArrowTool)
-                shape = ShapeCreator.createNewShape("TArrow");
+                shape = ShapeCreator.CreateNewShape("TArrow");
 
             else if (btn == btnRectangleTool)
-                shape = ShapeCreator.createNewShape("TRectangle");
+                shape = ShapeCreator.CreateNewShape("TRectangle");
 
             else if (btn == btnEllipseTool)
-                shape = ShapeCreator.createNewShape("TEllipse");
+                shape = ShapeCreator.CreateNewShape("TEllipse");
 
             else if (btn == btnStar)
-                shape = ShapeCreator.createNewShape("TStar");
+                shape = ShapeCreator.CreateNewShape("TStar");
 
             DrawType = (int)DrawElementType.Shape;
             CurrentTool = (int)DrawElementType.Shape;
@@ -417,16 +404,48 @@ namespace MyPaint
                 color = MyColorConverter.convertToSolidColor("#FFFFC90E");
 
             if (color != null)
-                updateFillStrokeColor(color);
+                UpdateFillStrokeColor(color);
         }
 
-        public void setButtonFocus(RibbonButton button, SolidColorBrush brushColor, double thicknessSize)
+        public void SetButtonFocus(RibbonButton button, SolidColorBrush brushColor, double thicknessSize)
         {
             button.BorderBrush = brushColor;
             button.BorderThickness = new Thickness(thicknessSize);
         }
 
-        public void updateFillStrokeColor(Brush color)
+        #endregion
+
+        #region Load Plugin
+
+        private void btnLoadShapePlugin_Click(object sender, RoutedEventArgs e)
+        {
+            Microsoft.Win32.OpenFileDialog openFileDialog = new Microsoft.Win32.OpenFileDialog();
+            openFileDialog.Filter = "Dll Plugin File|*.dll";
+
+            if ((bool)openFileDialog.ShowDialog())
+            {
+                TShape plugin = ShapeCreator.LoadShapePlugin(openFileDialog.FileName);
+                if (plugin != null)
+                {
+                    cbShapePlugin.Items.Add(plugin.getShapeName());
+                    cbShapePlugin.SelectedIndex = 0;
+                }
+            }
+        }
+
+        private void cbShapePlugin_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            string shapeName = cbShapePlugin.SelectedItem.ToString();
+            shape = ShapeCreator.CreateNewShape(shapeName);
+            DrawType = (int)DrawElementType.Shape;
+            CurrentTool = (int)DrawElementType.Shape;
+        }
+
+        #endregion
+
+        #region Stroke, Fill color, border thickness
+
+        public void UpdateFillStrokeColor(Brush color)
         {
             if (isStrokeColorPress)
             {
@@ -456,7 +475,10 @@ namespace MyPaint
             if (isSelectShape)
                 shape.updateShapeStyle(PaintCanvas.Children);
             else
-                changeColorText(color);
+            {
+                if (TTextBox != null)
+                    TTextBox.changeTextColor(isStrokeColorPress, color);
+            }
 
         }
 
@@ -464,7 +486,7 @@ namespace MyPaint
         private void colorPicker_SelectedColorChanged(object sender, RoutedPropertyChangedEventArgs<Color?> e)
         {
             SolidColorBrush newColor = new SolidColorBrush((Color)colorPicker.SelectedColor);
-            updateFillStrokeColor(newColor);
+            UpdateFillStrokeColor(newColor);
         }
 
         // StrokeColor Button Click
@@ -480,8 +502,6 @@ namespace MyPaint
             isStrokeColorPress = false;
             isFillColorPress = true;
         }
-
-        #region Stroke
 
         // Đặt kích thước stroke
         public void setStrokeThickness(double strokeThicknessSize)
@@ -514,6 +534,12 @@ namespace MyPaint
         private void btnStroke4_Click(object sender, RoutedEventArgs e)
         {
             setStrokeThickness(8);
+        }
+
+        // Tô một vùng cùng màu của bảng vẽ
+        private void btnFill_Click(object sender, RoutedEventArgs e)
+        {
+            // Fill shape
         }
 
         #endregion
@@ -615,7 +641,7 @@ namespace MyPaint
                 ImageBrush image = new ImageBrush();
                 image.ImageSource = new BitmapImage(new Uri(@openFileDialog.FileName, UriKind.Relative));
 
-                shape = ShapeCreator.createNewShape("TRectangle");
+                shape = ShapeCreator.CreateNewShape("TRectangle");
                 shape.FillColorBrush = image;
                 shape.StrokeColorBrush = System.Windows.Media.Brushes.Transparent;
                 shape.StartPoint = new Point(0, 0);
@@ -652,9 +678,9 @@ namespace MyPaint
 
         #endregion
 
-        #region Select, Unselect the last children of Canvas, Earse all childrens of canvas
+        #region Select, Unselect the last children of Canvas
 
-        public void unSelectedTheLastChildrenOfCanvas()
+        public void UnSelectedTheLastChildrenOfCanvas()
         {
             if (PaintCanvas.Children.Count >= 1)
             {
@@ -664,7 +690,7 @@ namespace MyPaint
             }
         }
 
-        public void selectedTheLastChildrenOfCanvas()
+        public void SelectedTheLastChildrenOfCanvas()
         {
             if (PaintCanvas.Children.Count >= 1)
             {
@@ -682,7 +708,7 @@ namespace MyPaint
         {
             DrawType = (int)DrawElementType.Shape;
             CurrentTool = (int)DrawElementType.SelectionTool;
-            shape = ShapeCreator.createNewShape("TRectangle");
+            shape = ShapeCreator.CreateNewShape("TRectangle");
         }
 
         // Copy
@@ -702,7 +728,7 @@ namespace MyPaint
         private void btnPaste_Click(object sender, RoutedEventArgs e)
         {
             // Xóa bỏ ContentControl của các hình đang chọn (nếu có)
-            unSelectedTheLastChildrenOfCanvas();
+            UnSelectedTheLastChildrenOfCanvas();
 
             // Lấy hình ảnh từ Clipboard
             BitmapSource bmi = Clipboard.GetImage();
@@ -711,7 +737,7 @@ namespace MyPaint
                 // Tạo ImageBrush để fill cho Rectangle
                 ImageBrush imb = new ImageBrush(bmi);
 
-                shape = ShapeCreator.createNewShape("TRectangle");
+                shape = ShapeCreator.CreateNewShape("TRectangle");
                 shape.FillColorBrush = imb;
                 shape.StrokeColorBrush = System.Windows.Media.Brushes.Transparent;
                 shape.StartPoint = new Point(0, 0);
@@ -723,7 +749,7 @@ namespace MyPaint
                 shape.draw(isShiftKeyDown, PaintCanvas.Children);
 
                 // Show control cho ContentControl
-                selectedTheLastChildrenOfCanvas();
+                SelectedTheLastChildrenOfCanvas();
                 isSelectShape = true;
                 ShapeCommand cmd = new ShapeCommand(PaintCanvas.Children, PaintCanvas.Children[PaintCanvas.Children.Count - 1]);
             }
@@ -740,7 +766,7 @@ namespace MyPaint
                 // Xóa ContentControl của Select
                 removeLastChildren();
 
-                shape = ShapeCreator.createNewShape("TRectangle");
+                shape = ShapeCreator.CreateNewShape("TRectangle");
                 shape.StartPoint = StartPoint;
                 shape.EndPoint = EndPoint;
                 shape.FillColorBrush = System.Windows.Media.Brushes.White;
@@ -781,117 +807,40 @@ namespace MyPaint
             DrawType = (int)DrawElementType.Text;
         }
 
-        // Thay đổi 1 loại thuộc tính dp cho văn bản đang chọn
-        public void changePropertyText(System.Windows.DependencyProperty dp, object value)
-        {
-            if (rtbText != null)
-            {
-                TextSelection textSelection = rtbText.Selection;
-
-                if (!textSelection.IsEmpty)
-                {
-                    textSelection.ApplyPropertyValue(dp, value);
-                    rtbText.Focus();
-                }
-            }
-        }
-
-        // Thay đổi font
-        private void cbFontText_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            string newFont = cbFontText.SelectedValue.ToString();
-            changePropertyText(FontFamilyProperty, newFont);
-        }
-
-        // Thay đổi kích thước font chữ
-        private void cbSizeText_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            double newSize = double.Parse(cbSizeText.SelectedValue.ToString());
-            changePropertyText(FontSizeProperty, newSize);
-        }
-
-        // Thay đổi màu sắc văn bản, đổ màu văn bản
-        public void changeColorText(Brush newColor)
-        {
-            if (isStrokeColorPress)
-                changePropertyText(TextElement.ForegroundProperty, newColor);
-
-            if (isFillColorPress)
-                changePropertyText(TextElement.BackgroundProperty, newColor);
-        }
-
-        #region Bold, Italic, Underline
-
         private void btnBoldText_Click(object sender, RoutedEventArgs e)
         {
-            if (rtbText != null)
-            {
-                FontWeight fontWeight = (FontWeight)rtbText.Selection.GetPropertyValue(FontWeightProperty);
-                if (fontWeight == FontWeights.Bold)
-                    changePropertyText(FontWeightProperty, FontWeights.Regular);
-                else
-                    changePropertyText(FontWeightProperty, FontWeights.Bold);
-            }
+            if (TTextBox != null)
+                TTextBox.boldSelectionText();
         }
 
         private void btnItalicText_Click(object sender, RoutedEventArgs e)
         {
-            if (rtbText != null)
-            {
-                FontStyle fontStyle = (FontStyle)rtbText.Selection.GetPropertyValue(FontStyleProperty);
-                if (fontStyle == FontStyles.Italic)
-                    changePropertyText(FontStyleProperty, FontStyles.Normal);
-                else
-                    changePropertyText(FontStyleProperty, FontStyles.Italic);
-            }
+            if (TTextBox != null)
+                TTextBox.italicSelectionText();
         }
 
         private void btnUnderlineText_Click(object sender, RoutedEventArgs e)
         {
-            if (rtbText != null)
-            {
-                TextDecorationCollection textDecoration = (TextDecorationCollection)rtbText.Selection.GetPropertyValue(Inline.TextDecorationsProperty);
-                if (textDecoration.Count == 0)
-                    changePropertyText(Inline.TextDecorationsProperty, TextDecorations.Underline);
-                else
-                    changePropertyText(Inline.TextDecorationsProperty, null);
-            }
+            if (TTextBox != null)
+                TTextBox.underlineSelectionText();
+        }
+
+        private void cbFontText_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            string newFont = cbFontText.SelectedValue.ToString();
+            if (TTextBox != null)
+                TTextBox.changeFontFamily(newFont);
+        }
+
+        private void cbSizeText_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            double newSize = double.Parse(cbSizeText.SelectedValue.ToString());
+            if (TTextBox != null)
+                TTextBox.changeFontSize(newSize);
         }
 
         #endregion
-
-        #endregion
-
-        private void btnLoadShapePlugin_Click(object sender, RoutedEventArgs e)
-        {
-            Microsoft.Win32.OpenFileDialog openFileDialog = new Microsoft.Win32.OpenFileDialog();
-            openFileDialog.Filter = "Dll Plugin File|*.dll";
-
-            if((bool)openFileDialog.ShowDialog())
-            {
-                TShape plugin = ShapeCreator.LoadShapePlugin(openFileDialog.FileName);
-                if (plugin != null)
-                {
-                    cbShapePlugin.Items.Add(plugin.getShapeName());
-                    cbShapePlugin.SelectedIndex = 0;
-                }
-            }  
-        }
-
-        private void cbShapePlugin_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            string shapeName = cbShapePlugin.SelectedItem.ToString();
-            shape = ShapeCreator.createNewShape(shapeName);
-            DrawType = (int)DrawElementType.Shape;
-            CurrentTool = (int)DrawElementType.Shape;
-        }
-
-        private void btnFill_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-
+        
         #region Undo, Redo
 
         // Earse all children of canvas

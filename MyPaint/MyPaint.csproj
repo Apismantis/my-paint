@@ -37,6 +37,7 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows" />
     <Reference Include="System.Windows.Controls.Ribbon" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
@@ -65,6 +66,7 @@
     <Compile Include="Adorners\SizeAdorner.cs" />
     <Compile Include="Adorners\SizeChrome.cs" />
     <Compile Include="BitmapHelper.cs" />
+    <Compile Include="ColorConverter.cs" />
     <Compile Include="Command.cs" />
     <Compile Include="FillShapeHelper\CaroFillHelper.cs" />
     <Compile Include="Adorners\DesignerItemDecorator.cs" />
@@ -74,13 +76,16 @@
     <Compile Include="FillShapeHelper\RadialGradientHelper.cs" />
     <Compile Include="Adorners\ResizeThumb.cs" />
     <Compile Include="Adorners\RotateThumb.cs" />
+    <Compile Include="PaintElementCreator.cs" />
     <Compile Include="PaintUIElementManager.cs" />
     <Compile Include="ShapeCommand.cs" />
     <Compile Include="Shape\TArrow.cs" />
     <Compile Include="Shape\TStar.cs" />
     <Compile Include="Shape\TLine.cs" />
     <Compile Include="FillShapeHelper\SolidFillHelper.cs" />
+    <Compile Include="TextCreator.cs" />
     <Compile Include="TShapeCreator.cs" />
+    <Compile Include="TText.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -126,7 +131,7 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <None Include="ClassDiagram1.cd" />
+    <None Include="ClassDiagram.cd" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -144,16 +149,6 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\line_tool.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\ShapeLib\ShapesLib.csproj">
-      <Project>{47b1d57f-1353-416a-94c3-251219bdb036}</Project>
-      <Name>ShapesLib</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\TColorLib\TColorLib.csproj">
-      <Project>{dcec0bf5-ca56-4aad-8a82-cf1e04090fc2}</Project>
-      <Name>TColorLib</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\open.png" />
@@ -220,6 +215,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\delete.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ShapeLib\ShapeLib.csproj">
+      <Project>{dc954ded-8a04-41ff-be3e-b26f8fd611f7}</Project>
+      <Name>ShapeLib</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -48,9 +48,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ShapeLib\ShapesLib.csproj">
-      <Project>{47b1d57f-1353-416a-94c3-251219bdb036}</Project>
-      <Name>ShapesLib</Name>
+    <ProjectReference Include="..\ShapeLib\ShapeLib.csproj">
+      <Project>{dc954ded-8a04-41ff-be3e-b26f8fd611f7}</Project>
+      <Name>ShapeLib</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

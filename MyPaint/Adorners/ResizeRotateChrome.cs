@@ -7,7 +7,8 @@ namespace DiagramDesigner
     {
         static ResizeRotateChrome()
         {
-            FrameworkElement.DefaultStyleKeyProperty.OverrideMetadata(typeof(ResizeRotateChrome), new FrameworkPropertyMetadata(typeof(ResizeRotateChrome)));
+            FrameworkElement.DefaultStyleKeyProperty.OverrideMetadata(typeof(ResizeRotateChrome), 
+                new FrameworkPropertyMetadata(typeof(ResizeRotateChrome)));
         }
     }
 }

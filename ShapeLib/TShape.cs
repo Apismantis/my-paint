@@ -7,7 +7,6 @@ using System.Windows;
 using System.Windows.Media;
 using System.Windows.Controls;
 using System.Windows.Shapes;
-using TColorLib;
 
 namespace ShapeLib
 {
@@ -37,7 +36,7 @@ namespace ShapeLib
         {
             StartPoint = new Point(0, 0);
             EndPoint = new Point(0, 0);
-            StrokeColorBrush = MyColorConverter.convertToSolidColor("#FF22B14C");
+            StrokeColorBrush = System.Windows.Media.Brushes.Green;
             FillColorBrush = System.Windows.Media.Brushes.Transparent;
             StrokeThickness = 1;
         }

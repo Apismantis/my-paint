@@ -1,0 +1,4 @@
+E:\Dropbox\STUDY\KY 6\KTPM\Final Project\Paint\My Paint\ShapeLib\bin\Debug\ShapeLib.dll
+E:\Dropbox\STUDY\KY 6\KTPM\Final Project\Paint\My Paint\ShapeLib\bin\Debug\ShapeLib.pdb
+E:\Dropbox\STUDY\KY 6\KTPM\Final Project\Paint\My Paint\ShapeLib\obj\Debug\ShapeLib.dll
+E:\Dropbox\STUDY\KY 6\KTPM\Final Project\Paint\My Paint\ShapeLib\obj\Debug\ShapeLib.pdb
