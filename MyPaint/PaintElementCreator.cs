@@ -13,5 +13,7 @@ namespace MyPaint
         TShape LoadShapePlugin(string fileName);
 
         TText CreateNewTextElement();
+
+        string[] LoadPluginFromPluginLogFile();
     }
 }

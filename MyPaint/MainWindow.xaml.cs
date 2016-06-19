@@ -60,7 +60,7 @@ namespace MyPaint
         {
             InitializeComponent();
             StrokeThicknessSize = 1;
-            StrokeBrush = MyColorConverter.convertToSolidColor("#FF22B14C");
+            StrokeBrush = MyColorConverter.convertToSolidColor("#2196F3");
             FillBrush = System.Windows.Media.Brushes.Transparent;
             Dashes = new DoubleCollection();
         }
@@ -83,12 +83,26 @@ namespace MyPaint
             // Thêm các kiểu đổ màu vào combobox
             PopulateFillStyle();
 
+            // Load các Plugin đã được thêm vào trước đó
+            LoadPluginFromFile();
+
             // Thêm Adorner cho Canvas
             AdornerLayer aLayer = AdornerLayer.GetAdornerLayer(PaintCanvas);
             aLayer.Add(new MyPaint.Adorners.ResizingAdorner(PaintCanvas));
         }
 
-
+        private void LoadPluginFromFile()
+        {
+            string[] ShapeName = ShapeCreator.LoadPluginFromPluginLogFile();
+            if (ShapeName != null)
+            {
+                foreach (string s in ShapeName)
+                    cbShapePlugin.Items.Add(s);
+                if (ShapeName.Length > 0)
+                    cbShapePlugin.SelectedIndex = 0;
+            }
+        }
+        
         private void initHandleClickButton()
         {
             btnLineTool.Click += ButtonOnClick;
@@ -875,8 +889,6 @@ namespace MyPaint
             CurrentUIEIdx = RedoObject.Count - 1;
         }
 
-        // Undo: Xóa các đối tượng con của canvas và thêm vào danh sách các đối tượng redo
-        // Redo: Lấy các đối tượng trong danh sách redo thêm vào canvas
         private void btnRedo_Click(object sender, RoutedEventArgs e)
         {
             CurrentUIEIdx++;

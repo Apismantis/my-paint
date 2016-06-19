@@ -36,7 +36,7 @@ namespace ShapeLib
         {
             StartPoint = new Point(0, 0);
             EndPoint = new Point(0, 0);
-            StrokeColorBrush = System.Windows.Media.Brushes.Green;
+            StrokeColorBrush = System.Windows.Media.Brushes.Blue;
             FillColorBrush = System.Windows.Media.Brushes.Transparent;
             StrokeThickness = 1;
         }

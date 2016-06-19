@@ -50,6 +50,13 @@ namespace MyPaint
             return shapes.ContainsKey(shapeName);
         }
 
+        public TText CreateNewTextElement()
+        {
+            return null;
+        }
+
+        Logger pluginLogger = PluginLogger.getInstances();
+
         public TShape LoadShapePlugin(string fileName)
         {
             TShape result = null;
@@ -57,7 +64,16 @@ namespace MyPaint
             {
                 Assembly asm = Assembly.LoadFile(fileName);
                 result = CreatePluginFromAssembly(asm);
-                shapes.Add(result.getShapeName(), result);
+
+                if (result != null)
+                {
+                    if (!pluginLogger.hasLineInFile(fileName))
+                        pluginLogger.writeLine(fileName);
+
+                    if (!IsInShapes(result.getShapeName()))
+                        shapes.Add(result.getShapeName(), result);
+                }
+
             }
             catch (Exception)
             {
@@ -90,9 +106,19 @@ namespace MyPaint
             }
         }
 
-        public TText CreateNewTextElement()
+        public string[] LoadPluginFromPluginLogFile()
         {
-            return null;
+            List<string> result = new List<string>();
+            string[] files = pluginLogger.readAllLine();
+
+            foreach (string fileName in files)
+            {
+                TShape shape = LoadShapePlugin(fileName);
+                if (shape != null)
+                    result.Add(shape.getShapeName());
+            }
+
+            return result.ToArray();
         }
     }
 }

@@ -1,35 +1,35 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
   <Class Name="DiagramDesigner.ResizeRotateAdorner" Collapsed="true">
-    <Position X="15" Y="4.5" Width="2" />
+    <Position X="4" Y="6.25" Width="2" />
     <TypeIdentifier>
       <HashCode>BACAAAAAQAAAAAAAAAAAAIAQAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Adorners\ResizeRotateAdorner.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="DiagramDesigner.ResizeRotateChrome" Collapsed="true">
-    <Position X="17.25" Y="4.5" Width="2.5" />
+    <Position X="0.5" Y="7.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Adorners\ResizeRotateChrome.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="DiagramDesigner.SizeAdorner" Collapsed="true">
-    <Position X="22.25" Y="4.5" Width="1.5" />
+    <Position X="2.25" Y="6.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>BACAAAAAQAAAAIAAAAAAAIAQAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Adorners\SizeAdorner.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="DiagramDesigner.SizeChrome" Collapsed="true">
-    <Position X="12.75" Y="5.75" Width="1.5" />
+    <Position X="2.25" Y="7.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Adorners\SizeChrome.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="DiagramDesigner.DoubleFormatConverter" Collapsed="true" BaseTypeListCollapsed="true">
-    <Position X="5.5" Y="6" Width="2.25" />
+    <Position X="5" Y="4.75" Width="2" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAIAAAAAAAAgAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Adorners\SizeChrome.cs</FileName>
@@ -37,161 +37,208 @@
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
   <Class Name="DiagramDesigner.DesignerItemDecorator" Collapsed="true">
-    <Position X="12.75" Y="4.5" Width="2" />
+    <Position X="4" Y="7.25" Width="2" />
     <TypeIdentifier>
       <HashCode>AAgAAAAAAACAAAAAAAAAAAAAAEAABAAAAAAAAAiAABA=</HashCode>
       <FileName>Adorners\DesignerItemDecorator.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="DiagramDesigner.MoveThumb" Collapsed="true">
-    <Position X="16.75" Y="5.75" Width="1.5" />
+    <Position X="2.25" Y="8.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>EAAAAAAAAAAAAIAAAAAAAAAAAAAAAEAAAEAAAAAAAAA=</HashCode>
       <FileName>Adorners\MoveThumb.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="DiagramDesigner.ResizeThumb" Collapsed="true">
-    <Position X="15" Y="5.75" Width="1.5" />
+    <Position X="0.5" Y="8.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>EAAAAAAAAAAAAIAAAgAAAAQCAACAAAAAAAAAAADAACA=</HashCode>
       <FileName>Adorners\ResizeThumb.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="DiagramDesigner.RotateThumb" Collapsed="true">
-    <Position X="18.75" Y="5.75" Width="1.5" />
+    <Position X="4" Y="8.25" Width="2" />
     <TypeIdentifier>
       <HashCode>EAAAAAQAhAAAAIAAAAAAAAACAAAEAAAAAAAAAABAAAA=</HashCode>
       <FileName>Adorners\RotateThumb.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="MyPaint.Adorners.ResizingAdorner" Collapsed="true">
-    <Position X="20.25" Y="4.5" Width="1.5" />
+    <Position X="0.5" Y="6.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>BAAAAQAABAAAAAAAAAAAAIAQAAAAggAAAAAAACIAgQA=</HashCode>
       <FileName>Adorners\ResizingAdorner.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="MyPaint.MainWindow" Collapsed="true">
-    <Position X="0.5" Y="0.75" Width="1.5" />
+    <Position X="0.5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>hFg4EARJmWDhUAEgAJBAxEpFBACpBeawQQNAOGgAByo=</HashCode>
       <FileName>MainWindow.xaml.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="MyPaint.TArrow" Collapsed="true">
-    <Position X="12.75" Y="2.5" Width="1.5" />
+    <Position X="6.75" Y="7.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAACAAAAEAAAAAAAAAIAAAAAAAAAAAAAAQAAEAAAAAA=</HashCode>
       <FileName>Shape\TArrow.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="MyPaint.TShapeCreator" Collapsed="true">
-    <Position X="13.75" Y="1" Width="1.5" />
+    <Position X="10" Y="2" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAIQAAAAAAIAgAAEAAAAAAAoAAAAAAQABAA=</HashCode>
+      <HashCode>AAAAAAAAIAIQAQAAAAIAgAAEAAAAAAAoAAAAAAQABAA=</HashCode>
       <FileName>TShapeCreator.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="ShapeLib.TStar" Collapsed="true">
-    <Position X="14.5" Y="2.5" Width="1.5" />
+    <Position X="8.5" Y="7.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAGAAAAEAAAAAAAAAIAAAAAAAAAAAAAAQAAEAAAAAA=</HashCode>
       <FileName>Shape\TStar.cs</FileName>
       <NewMemberFileName>Shape\TLine.cs</NewMemberFileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="MyPaint.FillShapeHelper">
-    <Position X="4" Y="0.75" Width="1.5" />
+  <Class Name="MyPaint.FillShapeHelper" Collapsed="true">
+    <Position X="4" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAA=</HashCode>
       <FileName>FillShapeHelper\FillShapeHelper.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="MyPaint.SolidFillHelper">
-    <Position X="0.5" Y="2.5" Width="1.5" />
+  <Class Name="MyPaint.SolidFillHelper" Collapsed="true">
+    <Position X="0.5" Y="2" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAA=</HashCode>
       <FileName>FillShapeHelper\SolidFillHelper.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="MyPaint.LinearGradientHelper">
-    <Position X="5.75" Y="2.5" Width="1.5" />
+  <Class Name="MyPaint.LinearGradientHelper" Collapsed="true">
+    <Position X="5.75" Y="2" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAA=</HashCode>
       <FileName>FillShapeHelper\LinearGradientHelper.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="MyPaint.RadialGradientHelper">
-    <Position X="4" Y="2.5" Width="1.5" />
+  <Class Name="MyPaint.RadialGradientHelper" Collapsed="true">
+    <Position X="4" Y="2" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAA=</HashCode>
       <FileName>FillShapeHelper\RadialGradientHelper.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="MyPaint.ImageFillHelper">
-    <Position X="2.25" Y="2.5" Width="1.5" />
+  <Class Name="MyPaint.ImageFillHelper" Collapsed="true">
+    <Position X="2.25" Y="2" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAA=</HashCode>
       <FileName>FillShapeHelper\ImageFillHelper.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="MyPaint.CaroFillHelper">
-    <Position X="7.5" Y="2.5" Width="1.5" />
+  <Class Name="MyPaint.CaroFillHelper" Collapsed="true">
+    <Position X="7.5" Y="2" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAA=</HashCode>
       <FileName>FillShapeHelper\CaroFillHelper.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="MyPaint.BitmapHelper">
-    <Position X="10" Y="2.25" Width="1.5" />
+  <Class Name="MyPaint.BitmapHelper" Collapsed="true">
+    <Position X="7.5" Y="3.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAIQAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>BitmapHelper.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="MyPaint.ShapeCommand" Collapsed="true">
-    <Position X="0.75" Y="6" Width="1.5" />
+    <Position X="0.5" Y="4.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAEAABAAAAAAAEAEAAAAAAAAAAAAAAAAAAAAgA=</HashCode>
       <FileName>ShapeCommand.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="MyPaint.Command" Collapsed="true">
-    <Position X="1.75" Y="4.5" Width="1.5" />
+    <Position X="0.5" Y="3.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAEAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Command.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="MyPaint.PaintUIElementManager" Collapsed="true">
-    <Position X="3" Y="6" Width="1.5" />
+    <Position X="2.5" Y="4.75" Width="1.75" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAEAAEAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>PaintUIElementManager.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="MyPaint.TextCreator" Collapsed="true">
-    <Position X="16" Y="1" Width="1.5" />
+    <Position X="12.25" Y="2" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAIAgAAAAAAAAAAgAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAQAAAAIAgAAAAAAAAAAgAAAAAAAAAAA=</HashCode>
       <FileName>TextCreator.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="MyPaint.MyColorConverter" Collapsed="true">
-    <Position X="8.25" Y="6" Width="1.5" />
+    <Position X="7.5" Y="4.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAACAAAAAAAAAAAAAgAAAAAAAAAAAAAIAAA=</HashCode>
       <FileName>ColorConverter.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="MyPaint.TText" Collapsed="true">
-    <Position X="16.5" Y="2.5" Width="1.5" />
+    <Position X="12.25" Y="3" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAGBEAAAAgAAAAAQAYAgAEAAAYAAAAAgBAAAgAAAg=</HashCode>
       <FileName>TText.cs</FileName>
     </TypeIdentifier>
   </Class>
+  <Class Name="MyPaint.Logger" Collapsed="true">
+    <Position X="15.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAgAAAAAAAAAAAAAAABAAAABAAAAAgBAAAA=</HashCode>
+      <FileName>Logger.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MyPaint.SettingLogger" Collapsed="true">
+    <Position X="16.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAA=</HashCode>
+      <FileName>SettingLogger.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MyPaint.PluginLogger" Collapsed="true">
+    <Position X="14.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAA=</HashCode>
+      <FileName>PluginLogger.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ShapeLib.TLine" Collapsed="true">
+    <Position X="10.25" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAEAAAAAAAAAIAAAAAAAAAAAAAAQAAEAAAAAA=</HashCode>
+      <FileName>Shape\TLine.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ShapeLib.TShape" Collapsed="true">
+    <Position X="10.25" Y="6" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="ShapeLib.TEllipse" Collapsed="true">
+    <Position X="14" Y="7.25" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="ShapeLib.TRectangle" Collapsed="true">
+    <Position X="12.25" Y="7.25" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Interface Name="MyPaint.PaintElementCreator" Collapsed="true">
+    <Position X="11.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAQAAAAIAgAAAAAAAAAAgAAAAAAAAAAA=</HashCode>
+      <FileName>PaintElementCreator.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
   <Font Name="Segoe UI" Size="9" />
 </ClassDiagram>

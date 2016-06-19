@@ -22,5 +22,10 @@ namespace MyPaint
         {
             return new TText();
         }
+
+        public string[] LoadPluginFromPluginLogFile()
+        {
+            return null;
+        }
     }
 }

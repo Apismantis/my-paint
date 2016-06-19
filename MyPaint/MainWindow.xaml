@@ -97,7 +97,7 @@
                             <ImageBrush ImageSource="Resources/arrow.png"/>
                         </RibbonButton.Background>
                     </RibbonButton>
-                    <ComboBox x:Name="cbShapePlugin" HorizontalAlignment="Left" Height="23" Margin="5,10,-61,-14.6" VerticalAlignment="Top" Width="84" SelectionChanged="cbShapePlugin_SelectionChanged" BorderBrush="White" Background="{x:Null}" Foreground="White" BorderThickness="0.5" IsReadOnly="True"/>
+                    <ComboBox x:Name="cbShapePlugin" HorizontalAlignment="Left" Height="23" Margin="5,10,-61,-14.6" VerticalAlignment="Top" Width="84" SelectionChanged="cbShapePlugin_SelectionChanged" BorderBrush="White" Background="{x:Null}" Foreground="#FF272525" BorderThickness="0.5" IsReadOnly="True"/>
                     <Button x:Name="btnLoadShapePlugin" Content="Load Shape" HorizontalAlignment="Left" Margin="69,45,-102,-30.4" VerticalAlignment="Top" Width="73" Height="23" Click="btnLoadShapePlugin_Click" BorderThickness="0.5" BorderBrush="White" Foreground="White" Background="#FF90CAF9"/>
                     <RibbonButton x:Name="btnStar" HorizontalAlignment="Left" Height="23" Margin="117,-26,-133.6,0" VerticalAlignment="Top" Width="23">
                         <RibbonButton.Background>

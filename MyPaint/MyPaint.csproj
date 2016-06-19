@@ -76,8 +76,11 @@
     <Compile Include="FillShapeHelper\RadialGradientHelper.cs" />
     <Compile Include="Adorners\ResizeThumb.cs" />
     <Compile Include="Adorners\RotateThumb.cs" />
+    <Compile Include="Logger.cs" />
     <Compile Include="PaintElementCreator.cs" />
     <Compile Include="PaintUIElementManager.cs" />
+    <Compile Include="PluginLogger.cs" />
+    <Compile Include="SettingLogger.cs" />
     <Compile Include="ShapeCommand.cs" />
     <Compile Include="Shape\TArrow.cs" />
     <Compile Include="Shape\TStar.cs" />
